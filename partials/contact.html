@@ -1,0 +1,37 @@
+<div id="left">
+    <h1 class="title" ng-bind="office.name"></h1>
+    <div class="address">
+        <span ng-bind="office.address.street1"></span><br />
+        <span ng-bind="office.address.street2"></span><br />
+        <span ng-bind="office.address.city"></span><span>, </span><span ng-bind="office.address.state"></span><span> </span><span ng-bind="office.address.postalCode"></span>
+    </div>
+    <div class="phone">
+        <span class="title">Phone Number: </span>
+        <span ng-bind="office.phone"></span><br />
+        <span class="title">Direct Line: </span>
+        <span ng-bind="office.directLine"></span>
+    </div>
+    <div class="email">
+        <span class="title">Email: </span>
+        <span ng-bind="office.email"></span>
+    </div>
+    <div class="hours">
+        <span class="title">Office Hours:</span><br />
+        <span ng-bind="office.hours"></span>
+    </div>        
+</div>
+<div id="right">    
+    <iframe
+      class="map"
+      frameborder="0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBcmtPxFA2nC2ifxYtQ-Nw7EGORuhlYxC8&q=34.162197,-118.631113">
+    </iframe>
+    <img src="img/contact-us.png" alt="office view from outside"/>
+    <form>
+        <h2 class="title">Leave a Message</h2>
+        <div><label class="title">Name: </label><input type="text" class="name" placeholder="Your Name"/></div>
+        <div><label class="title">Email: </label><input type="email" class="email" placeholder="example@email.com"/></div>
+        <div><label class="title">Message: </label><textarea class="message" placeholder="Your Message"></textarea></div>
+        <div class="center"><input type="submit" value="Submit" ng-click="submit" class="title button"/></div>
+    </form>   
+</div>

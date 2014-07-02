@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+<head>
+  <meta charset="utf-8">
+  <title>SNZ structural</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/hex.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="owl/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="owl/owl-carousel/owl.theme.css">
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="owl/owl-carousel/owl.carousel.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
+</head>
+<body>
+    <div class="navigation">
+        <div class="honeycomb">
+          <div class="ibws-fix">
+            <div class="hexagon no-hover">
+              <div class="hexagontent"></div>
+            </div>
+            <div class="hexagon home">
+              <div class="hexagontent"><a href="#/"><h2>HOME</h2></a></div>
+            </div>
+            <div class="hexagon no-hover">
+              <div class="hexagontent"></div>
+            </div>
+            <div class="hexagon jobs">
+              <div class="hexagontent"><a class="hex" href="#/jobs"><h3>Jobs</h3></a></div>
+            </div>
+          </div>
+          <div class="ibws-fix">
+            <div class="hexagon no-hover">
+              <div class="hexagontent"></div>
+            </div>
+            <div class="hexagon about">
+              <div class="hexagontent"><a class="hex" href="#/about-us"><h3>About Us</h3></a></div>
+            </div>
+            <div class="hexagon contact">
+              <div class="hexagontent"><a class="hex" href="#/contact-us"><h3>Contact Us</h3></a></div>
+            </div>
+            <div class="hexagon projects">
+              <div class="hexagontent"><a class="hex" href="#/projects"><h3>Projects</h3></a></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="view-container">  
+      <div ng-view class="view-frame {{pageClass}}"></div>
+    </div>
+</body>
+</html>

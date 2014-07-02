@@ -1,0 +1,97 @@
+@import url(http://fonts.googleapis.com/css?family=Lora);
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hexagon {
+  position: relative;
+  display: inline-block;
+  /* left/right margin approx. 25% of .hexagon width + spacing */
+  margin: 1px 18px;
+  background-color: hsl(257, 22%, 42%);
+  text-align: center;
+}
+.hexagon, .hexagon::before, .hexagon::after {
+  /* easy way: height is width * 1.732
+  actual formula is 2*(width/(2*Math.tan(Math.PI/6)))
+  remove border-radius for straight edges on hexagons */
+  width: 67px;
+  height: 116px;
+  border-radius: 20%/5%;
+}
+.hexagon::before {
+  background-color: inherit;
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: rotate(-60deg);
+  -ms-transform:rotate(-60deg); /* IE 9 */
+  -webkit-transform:rotate(-60deg); /* Opera, Chrome, and Safari */ 
+}
+.hexagon::after {
+  background-color: inherit;
+  content: "";
+  position: absolute;
+  left: 0;
+  transform: rotate(60deg);
+  -ms-transform:rotate(60deg); /* IE 9 */
+  -webkit-transform:rotate(60deg); /* Opera, Chrome, and Safari */ 
+}
+.hexagon:nth-child(even) {
+  /* top approx. 50% of .hexagon height + spacing */
+  top: 59px;
+}
+.hexagon.lighter, .hexagon.lighter:hover {
+   background-color:  hsl(257, 22%, 66%);
+}
+.hexagon:hover {
+  background-color:  darkslategrey;
+  cursor: pointer;
+  z-index: 105;
+}
+.hexagon.no-hover:hover {
+  background-color: hsl(257, 22%, 42%);
+  cursor:auto;
+}
+.hexagon:active {
+  background-color: rgb(97,97,97);
+  z-index: 110;
+}
+.hexanone {
+  position: relative;
+  display: inline-block;
+  width: 67px;
+  height: 116px;
+  margin: 1px 18px;
+}
+.hexanone:nth-child(even) {
+  top: 59px;
+}
+.hexagontent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); /* IE 9 */
+  -webkit-transform: translate(-50%, -50%); /* Opera, Chrome, and Safari */ 
+  width: 140%;
+  font-size: 1.5rem;
+  line-height: 1.0;
+  z-index: 100;
+}
+.hexagontent *{
+    color: rgb(214, 214, 214);
+}
+.hexagontent a:hove{
+    color: rgb(214, 214, 214);
+}
+.ibws-fix {
+  /* inline-block whitespace fix */
+  font-size: 0;
+}
+.honeycomb {
+  margin: 0 auto;
+  text-align: center;
+}

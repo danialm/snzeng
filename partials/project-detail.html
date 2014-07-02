@@ -1,0 +1,22 @@
+<div id="left">
+    <h1 class="title" ng-bind="project.name"></h1>
+    <p ng-bind="project.description"></p>
+    <ul class="specs">
+      <li ng-repeat="(key, val) in project.spec">
+        <span class="title">{{key}}</span>: <span>{{val}}</span>
+      </li>      
+    </ul>
+</div>
+<div id="right">
+    <div class="project-images">
+    <img ng-src="{{img}}"
+       class="project"
+       ng-repeat="img in project.images"
+       ng-class="{active: mainImageUrl==img}">
+    </div>
+    <ul class="project-thumbs">
+      <li ng-repeat="img in project.images">
+        <img ng-src="{{img}}" ng-click="setImage(img)">
+      </li>
+    </ul>
+</div>
