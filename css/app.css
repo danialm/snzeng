@@ -258,6 +258,9 @@ ul.specs > li{
     padding-left: 10px;
     margin-bottom: 10px;
 }
+.contact #right .row{
+	width: 100%;
+}
 .contact #right iframe{
     width: 800px;
     height: 400px;
