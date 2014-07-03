@@ -258,7 +258,7 @@ ul.specs > li{
     padding-left: 10px;
     margin-bottom: 10px;
 }
-.contact #right .row{
+.contact #right .fullWidth{
 	width: 100%;
 }
 .contact #right iframe{
