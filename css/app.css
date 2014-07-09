@@ -10,7 +10,7 @@
 /*font-family: 'Oswald', sans-serif;*/
 
 /* Global */
-html, body, .view-container, .view-frame{
+html, body, .view-container, .view-frame{ 
     margin: 0;
     padding: 0;
     position: absolute !important;
