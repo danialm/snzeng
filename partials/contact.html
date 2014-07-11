@@ -31,9 +31,10 @@
     <img src="img/contact-us.png" alt="office view from outside"/>
     <form>
         <h2 class="title">Leave a Message</h2>
-        <div><label class="title">Name: </label><input type="text" class="name" placeholder="Your Name"/></div>
-        <div><label class="title">Email: </label><input type="email" class="email" placeholder="example@email.com"/></div>
-        <div><label class="title">Message: </label><textarea class="message" placeholder="Your Message"></textarea></div>
-        <div class="center"><input type="submit" value="Submit" ng-click="submit" class="title button"/></div>
-    </form>   
+        <div><label class="title">Name: </label><input type="text" class="name" placeholder="Your Name" ng-model="user.name"/></div>
+        <div><label class="title">Email: </label><input type="email" class="email" placeholder="example@email.com" ng-model="user.email"/></div>
+        <div><label class="title">Message: </label><textarea class="message" placeholder="Your Message" ng-model="user.message"></textarea></div>
+        <div style="height:20px"  class="{{result.class}}"><span class="{{result.icon}}"></span> <span ng-bind="result.val"></span></div>
+        <div class="center"><input type="submit" value="Submit" ng-click="submit(user)" class="title button"/></div>
+    </form>  
 </div>

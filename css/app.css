@@ -30,6 +30,21 @@ html, body, .view-container, .view-frame{
 .center{
     text-align: center;
 }
+.error{
+    color: red;
+}
+.working{
+    color: #0c83e7;
+}
+.success{
+    color: #3cb774;
+}
+.fa-spin {
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+}
 .navigation{
     position: fixed;
     top: -50px;

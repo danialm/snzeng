@@ -43,6 +43,58 @@ phonecatControllers.controller('contactCtrl', ['$scope', 'office',
     changeNav('contact');      
     $scope.pageClass = 'contact';
     $scope.office = office.query();
+    
+    $scope.submit = function(user){
+                        if(user === undefined){// || user.name === '' || user.email === '' || user.message ===''){
+                            $scope.result ={ 'val':'Pleaes fill out the form!',
+                                             'class':'error',
+                                             'icon':'fa fa-exclamation fa-2x' 
+                                         };
+                            return false;
+                        }
+                        if(user.name === undefined || user.name == ''){
+                            $scope.result ={ 'val':'What do we call you?',
+                                             'class':'error',
+                                             'icon':'fa fa-exclamation fa-2x' 
+                                         };
+                            return false;
+                        }
+                        if(user.email === undefined || user.email == ''){
+                            $scope.result ={ 'val':'How do we contact you back?',
+                                             'class':'error',
+                                             'icon':'fa fa-exclamation fa-2x' 
+                                         };
+                            return false; 
+                        }
+                        if(user.message === undefined || user.message == ''){
+                            $scope.result ={ 'val':'Don\'t you have a message for us?',
+                                             'class':'error',
+                                             'icon':'fa fa-exclamation fa-2x' 
+                                         };
+                            return false;
+                        }
+                        $scope.result ={ 'val':'Thanks! It is sending...',
+                                             'class':'working',
+                                             'icon':'fa fa-cog fa-spin fa-2x'
+                                         };
+                                $http.post('/email_sender.php', {
+                                                                name: user.name,
+                                                                email: user.email,
+                                                                message: user.message
+                                                            }).success(function(){
+                                                                $scope.result ={    'val':'Cool! Get back to you soon.',
+                                                                                    'class':'success',
+                                                                                    'icon':'fa fa-check fa-2x'
+                                                                                };
+                                                            }).error(function(){
+                                                                $scope.result ={    'val':'Sorry! Cannot send it.',
+                                                                                    'class':'error',
+                                                                                    'icon':'fa fa-exclamation fa-2x'
+                                                                                };
+                                                            });
+                        return true;
+                   };
+                        
   }]);
   
 phonecatControllers.controller('aboutCtrl', ['$scope',
