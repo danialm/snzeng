@@ -38,8 +38,8 @@ phonecatControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '
     };
   }]);
   
-phonecatControllers.controller('contactCtrl', ['$scope', 'office',
-  function($scope, office) {
+phonecatControllers.controller('contactCtrl', ['$scope', 'office', '$http',
+  function($scope, office, $http) {
     changeNav('contact');      
     $scope.pageClass = 'contact';
     $scope.office = office.query();
@@ -77,21 +77,28 @@ phonecatControllers.controller('contactCtrl', ['$scope', 'office',
                                              'class':'working',
                                              'icon':'fa fa-cog fa-spin fa-2x'
                                          };
-                                $http.post('/email_sender.php', {
-                                                                name: user.name,
-                                                                email: user.email,
-                                                                message: user.message
-                                                            }).success(function(){
-                                                                $scope.result ={    'val':'Cool! Get back to you soon.',
-                                                                                    'class':'success',
-                                                                                    'icon':'fa fa-check fa-2x'
-                                                                                };
-                                                            }).error(function(){
-                                                                $scope.result ={    'val':'Sorry! Cannot send it.',
-                                                                                    'class':'error',
-                                                                                    'icon':'fa fa-exclamation fa-2x'
-                                                                                };
-                                                            });
+                                         
+                        $http.get('/email.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message ).success(function(data){
+                                                                    
+                                                                    if(data == 1){
+                                                                        $scope.result ={    
+                                                                                        'val':'Cool! Get back to you soon.',
+                                                                                        'class':'success',
+                                                                                        'icon':'fa fa-check fa-2x'
+                                                                                       };
+                                                                    }else{
+                                                                        $scope.result ={    'val':'Sorry! Cannot send it.',
+                                                                                            'class':'error',
+                                                                                            'icon':'fa fa-exclamation fa-2x'
+                                                                                        };                                                                        
+                                                                    }
+                                                        })
+                                                       .error(function(){
+                                                                    $scope.result ={    'val':'Sorry! Cannot send it.',
+                                                                                        'class':'error',
+                                                                                        'icon':'fa fa-exclamation fa-2x'
+                                                                                    };
+                        });
                         return true;
                    };
                         
