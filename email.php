@@ -1,21 +1,27 @@
 <?php
-define('SNZENG_EMAIL', 'shawnk@snzeng.com');
+define('TEST_ENV_EMAIL', 'gdanialq@gmail.com');
+define('DOMAIN', 'localhost');
+define('EMAIL', defined('TEST_ENV_EMAIL')? TEST_ENV_EMAIL : 'shawnk@snzeng.com');
+define('DB_NAME', 'snzeng');
+define('DB_UNAME', 'data');
+define('DB_PASS', 'D231564d');
 /*
  * COontact Us page form
  * 
  */
 if($_GET['from']){
-    $out = false;
+    $e_flag = $m_flag = $u_flag = false;
     if(isset($_GET['name']) && trim($_GET['name']) !== '' && isset($_GET['email']) && trim($_GET['email']) !== '' && isset($_GET['message']) && trim($_GET['message']) !== '' ){
         $user = array(
                         'name'      =>  $_GET['name'],
                         'email'     =>  $_GET['email'],
                         'message'   =>  $_GET['message']
                     );
-        $out = send_email($user, '[SNZENG]contac_us');
-        save_to_db($user, 'users');
+        $e_flag = send_email($user, '[SNZENG]contac_us');
+        $m_flag = save_message($user['email'], $user['message']);
+        $u_flag = save_user($user['email'], $user['name']);
     }
-    print_r($out);
+    print_r($m_flag && $e_flag && u_flag);
 }
 
 function send_email($obj, $sub){    
@@ -24,9 +30,44 @@ function send_email($obj, $sub){
                .'Message: ' . $obj['message'] ;
     $message = wordwrap($message, 70);
     
-    return mail(SNZENG_EMAIL , $subject, $message);
+    return mail(EMAIL , $subject, $message);
 }
-function save_to_db($obj , $tbl){
-    return true;
+function save_message($email, $message=''){
+    $con = connect_db();
+    if($con){
+        $q = "INSERT INTO messages (email, message)
+                              VALUES ('" . $email . "', '" . $message . "')";
+        $res = mysqli_query($con,$q);
+        if($res){
+            return true;
+        }
+    }
+    return false;
 }
-
+function save_user($email, $name, $pass=''){
+    $con = connect_db();
+    if($con){
+        $q = "SELECT * FROM users where email ='" . $email . "'";
+        $res = mysqli_query($con,$q);
+        $row = mysqli_fetch_array($res);
+        if($row === null){
+            $q = "INSERT INTO users (email, name, password)
+                              VALUES ('" . $email . "', '" . $name . "', '" . $pass . "')";
+            $res = mysqli_query($con,$q);
+            if($res){
+                return true;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+function connect_db(){
+    $con = mysqli_connect(DOMAIN,DB_UNAME,DB_PASS,DB_NAME);
+    // Check connection
+    if (mysqli_connect_errno()){
+        //var_dump(mysqli_connect_error());
+      return false;
+    }
+    return $con;
+}

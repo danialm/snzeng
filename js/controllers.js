@@ -33,6 +33,7 @@ phonecatControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '
     $scope.project = projects.get({projectId: $routeParams.projectId}, function(project) {
       $scope.mainImageUrl = project.images[0];
     });
+    console.log($scope.project);
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "snzeng"
+AuthUserFile "/home/admindanial/.htpasswds/public_html/snzeng/passwd"
+require valid-user

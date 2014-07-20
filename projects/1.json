@@ -7,9 +7,9 @@
        "img/projects/project1.1.jpg", 
        "img/projects/project1.2.jpg", 
        "img/projects/project1.3.jpg", 
-       "img/projects/project1.4.jpg",
-       "img/projects/project1.5.jpg"
+       "img/projects/project1.4.jpg"
    ],
+   "plot":"img/projects/project1.5.jpg",
    "spec": {
        "type":"Commercial",
        "Area":"5650 sq. ft",

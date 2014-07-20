@@ -54,6 +54,37 @@ html, body, .view-container, .view-frame{
 .navigation a:hover{
     text-decoration: none;
 }
+.navigation .ham{
+    display: none;
+}
+@media screen and (max-width: 1070px){
+    .navigation{
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: hsl(257, 22%, 42%);
+        height: 50px;
+        overflow: hidden;
+    }
+    .navigation .ham{
+        display: inline-block;
+        width: 50px;
+        height: 40px;
+        background: #fff;
+        position: relative;
+        top: 5px;
+        left: 10px;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .navigation .ham span{
+        width: 36px;
+        height: 36px;
+        color: hsl(257, 22%, 42%);;
+    }
+    
+}
 
 /* HOMEPAGE */
 .homepageBg{
@@ -108,8 +139,6 @@ html, body, .view-container, .view-frame{
 .home .corner>div:hover .val{
     display: inline-block;
 }
-
-
 
 /* Projects List*/
 .view-frame.projectsList{
@@ -214,7 +243,7 @@ ul.project-thumbs li {
   border: 1px solid black;
   border-radius: 5px;
   display: inline-block;
-  margin: 1em;
+  margin: 0.8em;
   background-color: #fff;
   box-shadow: 10px 10px 10px rgba(0,0,0,.5);
   position: relative;
@@ -250,7 +279,29 @@ ul.specs > li{
 }
 .projectDetail #left ul{
     margin-left: 10px;
+    margin-bottom: 10px;
 }
+@media screen and (min-width: 1380px){
+    .project-images {
+        height: auto;
+        text-align: left;
+    }
+    img.project {
+        position: initial;
+        margin: 1em;
+        height: auto;
+        top: 0px;
+        max-width: 47%;
+        display: inline-block;
+        box-sizing: border-box;
+    }
+    ul.project-thumbs {
+        display: none;
+    }
+}
+
+
+
 
 /*About Us*/
 .view-frame.about{
