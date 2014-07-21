@@ -54,7 +54,7 @@ html, body, .view-container, .view-frame{
 .navigation a:hover{
     text-decoration: none;
 }
-.navigation .ham{
+.navigation .head{
     display: none;
 }
 @media screen and (max-width: 1070px){
@@ -64,17 +64,29 @@ html, body, .view-container, .view-frame{
         left: 0;
         top: 0;
         background: hsl(257, 22%, 42%);
-        height: 50px;
         overflow: hidden;
     }
+    .navigation .head{
+        display: block;
+        height: 110px;
+    }
+    .navigation .head .logo{
+        text-align: center;
+        margin: 0;
+        height: 60px;
+        padding-top: 10px;
+        background: hsl(257, 29%, 60%);
+    }
+    .navigation .head .logo a{
+        color: rgb(214, 214, 214);
+    }
     .navigation .ham{
-        display: inline-block;
+        display: block;
         width: 50px;
         height: 40px;
-        background: #fff;
-        position: relative;
-        top: 5px;
-        left: 10px;
+        background: rgb(214, 214, 214);
+        margin: 5px;
+        float: right;
         text-align: center;
         border-radius: 5px;
     }
@@ -83,7 +95,20 @@ html, body, .view-container, .view-frame{
         height: 36px;
         color: hsl(257, 22%, 42%);;
     }
-    
+    .navigation .honeycomb{
+        display: none;
+    }
+    .navigation .honeycomb h2, .navigation .honeycomb h3, .navigation .honeycomb span{
+        border-bottom: 2px hsl(257, 29%, 60%) solid;
+        margin: 0;
+        padding: 10px 0;
+        font-size: 24px;
+        padding-left: 20px;
+        color: rgb(214, 214, 214);
+    }
+    .navigation .honeycomb h2{
+        border-top: 2px hsl(257, 29%, 60%) solid;
+    }
 }
 
 /* HOMEPAGE */
