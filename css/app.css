@@ -18,6 +18,9 @@ html, body, .view-container, .view-frame{
     min-height: 100%;
     font-family: 'Cabin Condensed', sans-serif;
 }
+h3{
+    font-size: 20px;
+}
 .title{
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
@@ -59,7 +62,7 @@ html, body, .view-container, .view-frame{
 }
 @media screen and (max-width: 1070px){
     .navigation{
-        position: fixed;
+        position: absolute;
         width: 100%;
         left: 0;
         top: 0;
@@ -97,6 +100,9 @@ html, body, .view-container, .view-frame{
     }
     .navigation .honeycomb{
         display: none;
+    }
+    .navigation .honeycomb .lighter{
+        background-color: hsl(257, 22%, 66%);
     }
     .navigation .honeycomb h2, .navigation .honeycomb h3, .navigation .honeycomb span{
         border-bottom: 2px hsl(257, 29%, 60%) solid;
@@ -374,29 +380,30 @@ ul.specs > li{
 	width: 100%;
 }
 .contact #right iframe{
-    width: 800px;
-    height: 400px;
+    width: 60%;
+    height: 600px;
     border: none;
     display: inline-block;
     margin-bottom: 20px;
     box-shadow: 0 0 20px #000;
+    float: right;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .contact #right img, .contact #right form{
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
     box-shadow: 0 0 20px #000;
+    width: 30%;
+    margin-bottom: 20px;
 }
 .contact #right img{
-    width: 400px;
-    float: left;
     
 }
 .contact #right form{
-    width: 370px;
     padding: 20px;
     background-color: #DADADA;
-    margin-left: 30px;
 }
 .contact #right form h2{
     margin-top: 0;

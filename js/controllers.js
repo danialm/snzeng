@@ -15,7 +15,6 @@ phonecatControllers.controller('homepageCtrl', ['$scope', 'office',
     changeNav("home");
     $scope.pageClass = 'home';
     $scope.office = office.query();
-    console.log($scope.office);
   }]);
   
 phonecatControllers.controller('projectsListCtrl', ['$scope', 'projects',

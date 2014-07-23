@@ -1,6 +1,10 @@
 $(document).ready(function(){
-   $('.navigation .ham').click(function(){
-       console.log('______________________');
-      $('.navigation .honeycomb').slideToggle(); 
-   }); 
+    if($(window).width() < 1070){
+        $('.navigation .ham').click(function(){
+           $('.navigation .honeycomb').slideToggle(); 
+        });
+        $('.navigation .honeycomb a').click(function(){
+            $('.navigation .honeycomb').slideUp(0);
+        });
+    }
 });
