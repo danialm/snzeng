@@ -4,11 +4,9 @@
    "description": "",
    "images": [
        "img/projects/project3.0.jpg", 
-       "img/projects/project3.1.jpg", 
-       "img/projects/project3.2.jpg", 
-       "img/projects/project3.3.jpg"
+       "img/projects/project3.1.jpg"
    ],
-   "plot":"img/projects/project3.5.jpg",
+   "plot":"img/projects/project3.5.pdf",
    "spec": {
        "type":"",
        "Area":"",
