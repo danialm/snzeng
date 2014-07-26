@@ -1,9 +1,14 @@
 <div id="left">
 </div>
-<div id="right">
-    <iframe src="office/jobs.pdf"></iframe>
+<div id="right" ng-if="fileFlag">
+    <iframe src="{{path}}"></iframe>
     <div>
         <p>Please tap the button to see our job opportunities:</p>
-        <a href="office/jobs.pdf">Jobs</a>
+        <a href="{{path}}">Jobs</a>
+    </div>
+</div>
+<div id="right" ng-if="!fileFlag">
+    <div class="display">
+        <p><strong>Sorry!</strong> We do not have any job opportunity at the time.</p>
     </div>
 </div>

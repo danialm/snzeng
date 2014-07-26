@@ -7,7 +7,7 @@ phonecatAnimations.animation('.project', function() {
       return;
     }
     element.css({
-      top: 599
+      top: "100%"
     });
 
     jQuery(element).animate({
@@ -30,7 +30,7 @@ phonecatAnimations.animation('.project', function() {
     });
 
     jQuery(element).animate({
-      top: -500
+      top: "-100%"
     }, done);
 
     return function(cancel) {

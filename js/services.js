@@ -17,3 +17,21 @@ phonecatServices.factory('office', ['$resource',
       query: {method:'GET', params:{}}
     });
   }]);
+  
+phonecatServices.service('files',
+  function(){
+    this.exist = function(path){
+                    var flag = false;
+                    $.ajax({
+                        url:path,
+                        type:'HEAD',
+                        async: false,
+                        success: function()
+                        {
+                            flag = true;
+                        }
+                    });
+                    return flag;
+                };
+                //return this.exist;
+  });

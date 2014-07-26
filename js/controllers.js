@@ -32,7 +32,6 @@ phonecatControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '
     $scope.project = projects.get({projectId: $routeParams.projectId}, function(project) {
       $scope.mainImageUrl = project.images[0];
     });
-    console.log($scope.project);
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };
@@ -100,19 +99,20 @@ phonecatControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                                                                                     };
                         });
                         return true;
-                   };
-                        
+                   };                      
   }]);
   
 phonecatControllers.controller('aboutCtrl', ['$scope',
   function($scope) {
     changeNav('about');      
     $scope.pageClass = 'about';
-
   }]);
-phonecatControllers.controller('jobsCtrl', ['$scope',
-  function($scope) {
+  
+phonecatControllers.controller('jobsCtrl', ['$scope', 'files',
+  function($scope, files) {
+    var path = 'office/jobs.pdf';
+    $scope.path = path;  
     changeNav('jobs');      
     $scope.pageClass = 'jobs';
-
+    $scope.fileFlag = files.exist(path);
   }]);

@@ -5,32 +5,38 @@ define('EMAIL', defined('TEST_ENV_EMAIL')? TEST_ENV_EMAIL : 'shawnk@snzeng.com')
 define('DB_NAME', 'snzeng');
 define('DB_UNAME', 'data');
 define('DB_PASS', 'D231564d');
+define('THANK_YOU', 'Dear Custommr,'. "\r\n\r\n" .
+                    'We at S$Z Engineering do appretiate your contact. We will get back to you as soon as possible.'. "\r\n\r\n" .
+                    'Best regards,'. "\r\n" .
+                    'SNZENG'. "\r\n" .
+                     EMAIL);
 /*
  * COontact Us page form
  * 
  */
 if($_GET['from']){
-    $e_flag = $m_flag = $u_flag = false;
+    $thank_you = THANK_YOU;
+    $result = false;
     if(isset($_GET['name']) && trim($_GET['name']) !== '' && isset($_GET['email']) && trim($_GET['email']) !== '' && isset($_GET['message']) && trim($_GET['message']) !== '' ){
         $user = array(
                         'name'      =>  $_GET['name'],
                         'email'     =>  $_GET['email'],
                         'message'   =>  $_GET['message']
                     );
-        $e_flag = send_email($user, '[SNZENG]contac_us');
-        $m_flag = save_message($user['email'], $user['message']);
-        $u_flag = save_user($user['email'], $user['name']);
+        if(filter_var($user['email'], FILTER_VALIDATE_EMAIL)){
+            $result =   send_email(EMAIL, '[SNZENG]contac_us', get_message($user), $user['email'] ) && 
+                        send_email($user['email'], '[SNZENG] Thank You!', $thank_you, EMAIL) && 
+                        save_message($user['email'], $user['message']) && 
+                        save_user($user['email'], $user['name']);
+        }
     }
-    print_r($m_flag && $e_flag && u_flag);
+    echo $result;
 }
 
-function send_email($obj, $sub){    
+function send_email($to, $sub, $msg, $from){    
     $subject = $sub;
-    $message = 'From: ' . $obj['name'] . ' ' . $obj['email'] . "\r\n\r\n"
-               .'Message: ' . $obj['message'] ;
-    $message = wordwrap($message, 70);
-    
-    return mail(EMAIL , $subject, $message);
+    $message = wordwrap($msg, 70);
+    return mail($to , $subject, $message, "From: $from\n");
 }
 function save_message($email, $message=''){
     $con = connect_db();
@@ -70,4 +76,8 @@ function connect_db(){
       return false;
     }
     return $con;
+}
+function get_message($obj){
+        return 'From: ' . $obj['name'] . ' ' . $obj['email'] . "\r\n\r\n"
+               .'Message: ' . $obj['message'] ;
 }

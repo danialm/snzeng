@@ -4,7 +4,7 @@ $(document).ready(function(){
             $('.navigation .honeycomb').slideToggle();
         }
     });
-    $('.navigation .honeycomb a').click(function(){
+    $('.navigation .honeycomb a, .logo').click(function(){
         if($(window).width() < 1070){
             $('.navigation .honeycomb').slideUp(0);
         }

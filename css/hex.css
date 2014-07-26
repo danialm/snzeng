@@ -48,7 +48,6 @@
 }
 .hexagon:hover {
   background-color:  darkslategrey;
-  cursor: pointer;
   z-index: 105;
 }
 .hexagon.no-hover:hover {
