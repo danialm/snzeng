@@ -571,10 +571,11 @@ ul.specs > li{
     border: none;
     box-sizing: border-box;
 }
-.jobs #right>div:not(.display){
+.jobs #right>div{
     display: none;
 }
 .jobs #right .display{
+    display: block;
     margin-top: 50px;
 }
 @media screen and (max-width: 1070px){

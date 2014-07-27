@@ -110,7 +110,7 @@ phonecatControllers.controller('aboutCtrl', ['$scope',
   
 phonecatControllers.controller('jobsCtrl', ['$scope', 'files',
   function($scope, files) {
-    var path = 'office/jobs.pdf';
+    var path = 'office/job.pdf';
     $scope.path = path;  
     changeNav('jobs');      
     $scope.pageClass = 'jobs';
