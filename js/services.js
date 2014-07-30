@@ -2,23 +2,23 @@
 
 /* Services */
 
-var phonecatServices = angular.module('phonecatServices', ['ngResource']);
+var snzengServices = angular.module('snzengServices', ['ngResource']);
 
-phonecatServices.factory('projects', ['$resource',
+snzengServices.factory('projects', ['$resource',
   function($resource){
     return $resource('projects/:projectId.json', {}, {
       query: {method:'GET', params:{projectId:'projects'}, isArray:true}
     });
   }]);
   
-phonecatServices.factory('office', ['$resource',
+snzengServices.factory('office', ['$resource',
   function($resource){
     return $resource('office/office.json', {}, {
       query: {method:'GET', params:{}}
     });
   }]);
   
-phonecatServices.service('files',
+snzengServices.service('files',
   function(){
     this.exist = function(path){
                     var flag = false;
@@ -33,5 +33,4 @@ phonecatServices.service('files',
                     });
                     return flag;
                 };
-                //return this.exist;
   });

@@ -2,9 +2,9 @@
 
 /* Directives */
 
-var phonecatDirectives = angular.module('phonecatDirectives', []);
+var snzengDirectives = angular.module('snzengDirectives', []);
 
-phonecatDirectives.directive('navPtr',
+snzengDirectives.directive('navPtr',
   function(currentClass) {
     $(".navigation .hexagon").css("background", "hsl(257, 22%, 42%)");
     $(".navigation .hexagon."+currentClass).css("background","rgb(157, 144, 187");

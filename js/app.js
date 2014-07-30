@@ -2,16 +2,16 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var snzengApp = angular.module('snzengApp', [
   'ngRoute',
-  'phonecatAnimations',
-  'phonecatDirectives',
-  'phonecatControllers',
-  'phonecatFilters',
-  'phonecatServices'
+  'snzengAnimations',
+  'snzengDirectives',
+  'snzengControllers',
+  'snzengFilters',
+  'snzengServices'
 ]);
 
-phonecatApp.config(['$routeProvider',
+snzengApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {

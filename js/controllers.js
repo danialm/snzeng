@@ -8,16 +8,17 @@ var changeNav = function(currentClass){
 };
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var snzengControllers = angular.module('snzengControllers', []);
 
-phonecatControllers.controller('homepageCtrl', ['$scope', 'office',
+snzengControllers.controller('homepageCtrl', ['$scope', 'office',
   function($scope, office) {
+      console.log('test');
     changeNav("home");
     $scope.pageClass = 'home';
     $scope.office = office.query();
   }]);
   
-phonecatControllers.controller('projectsListCtrl', ['$scope', 'projects',
+snzengControllers.controller('projectsListCtrl', ['$scope', 'projects',
   function($scope, projects) {
     changeNav("projects");
     $scope.pageClass = 'projectsList';
@@ -25,7 +26,7 @@ phonecatControllers.controller('projectsListCtrl', ['$scope', 'projects',
     $scope.orderProp = 'age';
   }]);
 
-phonecatControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', 'projects',
+snzengControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', 'projects',
   function($scope, $routeParams, projects) {
     changeNav();      
     $scope.pageClass = 'projectDetail';
@@ -37,7 +38,7 @@ phonecatControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '
     };
   }]);
   
-phonecatControllers.controller('contactCtrl', ['$scope', 'office', '$http',
+snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
   function($scope, office, $http) {
     changeNav('contact');      
     $scope.pageClass = 'contact';
@@ -102,13 +103,13 @@ phonecatControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                    };                      
   }]);
   
-phonecatControllers.controller('aboutCtrl', ['$scope',
+snzengControllers.controller('aboutCtrl', ['$scope',
   function($scope) {
     changeNav('about');      
     $scope.pageClass = 'about';
   }]);
   
-phonecatControllers.controller('jobsCtrl', ['$scope', 'files',
+snzengControllers.controller('jobsCtrl', ['$scope', 'files',
   function($scope, files) {
     var path = 'office/job.pdf';
     $scope.path = path;  
