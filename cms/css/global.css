@@ -1,0 +1,65 @@
+.header, .footer, .main{
+    background-color: #D2FFFB;
+    width: 100%;
+    overflow: auto;
+}
+.header, .footer{
+    background-color: #0c83e7;
+}
+.main{
+    min-height: 100%;
+}
+.inner{
+    width: 700px;
+    padding: 15px 0;
+    margin: 0 auto;
+}
+.span12, .span11, .span10, .span9, .span8, .span7, .span6, .span5, .span4, .span3, .span2, .span1{
+    float: left;
+    display: inline-block;
+    padding: 10px;
+}
+.span12{
+    width: 100%;
+}
+.span6{
+    width: 50%;
+}
+form#sign-in{
+    width: 60%;
+    margin: 30px 20%;
+    padding: 30px;
+    background-color: #FFFBD2;
+}  
+form#sign-in>*{
+    width: 100%;
+}
+form#sign-in input{
+    margin-bottom: 15px;
+}
+form#sign-in input[type=submit]{
+    width: 60%;
+    margin: 0 20%;
+}
+.nav-container>div{
+    text-align: center;
+}
+.nav{
+    width: 100%;
+    background-color:#FFFBD2;
+    position: relative;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 700px){
+    .inner{
+        width: 100%;
+    }
+}
