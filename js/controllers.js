@@ -12,7 +12,6 @@ var snzengControllers = angular.module('snzengControllers', []);
 
 snzengControllers.controller('homepageCtrl', ['$scope', 'office',
   function($scope, office) {
-      console.log('test');
     changeNav("home");
     $scope.pageClass = 'home';
     $scope.office = office.query();
@@ -78,7 +77,7 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                                              'icon':'fa fa-cog fa-spin fa-2x'
                                          };
                                          
-                        $http.get('/email.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message ).success(function(data){
+                        $http.get('/ajax.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message ).success(function(data){
                                                                     
                                                                     if(data == 1){
                                                                         $scope.result ={    

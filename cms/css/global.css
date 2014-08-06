@@ -6,11 +6,39 @@
 .header, .footer{
     background-color: #0c83e7;
 }
+table, thead, tbody, tfoot, tr{
+    width: 100%;
+}
+thead{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+thead tr{
+        background-color: #0c83e7;
+}
+tr{
+    background-color: #E5FFF8;
+}
+tr:nth-child(2n){
+    background-color: #BEFFED;
+}
+.button{
+    padding: 3px;
+    margin: 3px;
+    display: inline-block;
+    background: #aaa;
+    border: solid 1px #888;
+    border-radius: 3px;
+}
+.button:active{
+    background: #888;
+}
 .main{
     min-height: 100%;
 }
 .inner{
-    width: 700px;
+    width: 900px;
     padding: 15px 0;
     margin: 0 auto;
 }
@@ -24,6 +52,33 @@
 }
 .span6{
     width: 50%;
+}
+.span4{
+    width: 33.3333%;
+}
+.span3{
+    width: 25%;
+}
+.span2{
+    width: 16.6666%;
+}
+.right{
+    float: right;
+    display: inline-block;
+}
+.error{
+    color: red;
+}
+.breadcrumb{
+    background-color: inherit;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+}
+.header h1{
+    color: #D2FFFB;
+}
+.footer a{
+    color: #D2FFFB;
 }
 form#sign-in{
     width: 60%;
@@ -53,12 +108,7 @@ form#sign-in input[type=submit]{
     padding-bottom: 30px;
 }
 
-
-
-
-
-
-@media screen and (max-width: 700px){
+@media screen and (max-width: 900px){
     .inner{
         width: 100%;
     }
