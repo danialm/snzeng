@@ -18,9 +18,7 @@
 
 <script>
     function getMessages(){
-        var error = '',
-            messages = '',
-            tbody = $("table#contacts tbody");
+        var tbody = $("table#contacts tbody");
         tbody.empty();
          $.post( "ajax.php", {"inq":"contacts"}, 
             function(messages){

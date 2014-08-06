@@ -11,12 +11,12 @@ if($_GET['from']){
     $result = false;
     if(isset($_GET['name']) && trim($_GET['name']) !== '' && isset($_GET['email']) && trim($_GET['email']) !== '' && isset($_GET['message']) && trim($_GET['message']) !== '' ){
         $user = array(
-                        'name'      =>  $_GET['name'],
-                        'email'     =>  $_GET['email'],
-                        'message'   =>  $_GET['message']
+                        'name'      =>  strip_tags(htmlspecialchars($_GET['name'])),
+                        'email'     =>  strip_tags(htmlspecialchars($_GET['email'])),
+                        'message'   =>  strip_tags(htmlspecialchars($_GET['message']))
                     );
         if(filter_var($user['email'], FILTER_VALIDATE_EMAIL)){
-            $result =   send_email(EMAIL, '[SNZENG]contac_us', get_message($user), $user['email'] ) && 
+            $result =   send_email(EMAIL, '[SNZENG] Contac Us', get_message($user), $user['email'] ) && 
                         send_email($user['email'], '[SNZENG] Thank You!', $thank_you, EMAIL) && 
                         save_message($user['email'], $user['message']) && 
                         save_user($user['email'], $user['name']);

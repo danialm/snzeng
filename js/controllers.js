@@ -77,8 +77,8 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                                              'icon':'fa fa-cog fa-spin fa-2x'
                                          };
                                          
-                        $http.get('/ajax.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message ).success(function(data){
-                                                                    
+                        $http.get('/ajax.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message )
+                                                        .success(function(data){ 
                                                                     if(data == 1){
                                                                         $scope.result ={    
                                                                                         'val':'Cool! Get back to you soon.',
@@ -101,7 +101,6 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                         return true;
                    };                      
   }]);
-  
 snzengControllers.controller('aboutCtrl', ['$scope',
   function($scope) {
     changeNav('about');      
