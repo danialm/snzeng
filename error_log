@@ -1,3 +1,8 @@
 [05-Aug-2014 19:14:23 UTC] PHP Fatal error:  Call to undefined function get_contacts_info() in /home/admindanial/public_html/snzeng/cms/pages/contacts.php on line 2
 [05-Aug-2014 20:03:57 UTC] PHP Fatal error:  Call to undefined function connect_db() in /home/admindanial/public_html/snzeng/email.php on line 34
 [05-Aug-2014 20:06:07 UTC] PHP Fatal error:  Call to undefined function connect_db() in /home/admindanial/public_html/snzeng/cms/email.php on line 34
+[07-Aug-2014 18:14:54 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
+[07-Aug-2014 18:14:58 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
+[07-Aug-2014 18:15:05 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
+[07-Aug-2014 18:15:16 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
+[08-Aug-2014 20:52:32 UTC] PHP Fatal error:  Call to undefined function mysqli_fetch() in /home/admindanial/public_html/snzeng/cms/functions.php on line 58

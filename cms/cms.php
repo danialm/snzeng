@@ -1,8 +1,7 @@
 <?php
-        session_start();
+session_start();
 define("USER_NAME", "admin");
 define("PASSWORD", "admin");
-
 include 'functions.php';
 ?>
 <!DOCTYPE html>
@@ -14,6 +13,7 @@ include 'functions.php';
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/cms/css/global.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="/cms/js/global.js"></script>
     </head>
     <body>
         <?php;
@@ -29,9 +29,11 @@ include 'functions.php';
             }
         }
         if(isset($_POST['sign-in'])){
-            if( strip_tags(trim($_POST['username'])) == USER_NAME && strip_tags(trim($_POST['password'])) == PASSWORD ){
+            $usrn = strip_tags(trim($_POST['username']));
+            $psw = strip_tags(trim($_POST['password']));
+            if( $display_name = sign_in($usrn, $psw) ){
                     $access = true;
-                    $_SESSION['username'] = $_POST['username'];
+                    $_SESSION['username'] = $display_name;
                     $_SESSION['access'] = true;
                     $_SESSION['start_time'] = time();
             }else{
@@ -51,6 +53,8 @@ include 'functions.php';
                 $pg['name'] = 'Contacts';
             }else if($cmd === 'job' ){
                 $pg['name'] = 'Jobs';
+            }else if($cmd === 'users' ){
+                $pg['name'] = 'Users';
             }
         }else{
             $pg['name'] = 'Home';
@@ -86,6 +90,8 @@ include 'functions.php';
                             include 'pages/contacts.php';
                         }else if($pg['name'] === 'Jobs'){
                             include 'pages/job.php';
+                        }else if($pg['name'] === 'Users'){
+                            include 'pages/users.php';
                         }?>
                 <?php } ?>
             <?php } ?>

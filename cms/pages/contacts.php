@@ -9,7 +9,7 @@
             <td class="span2">date</td>
             <td class="span4">email</td>
             <td class="span2">name</td>
-            <td class="span4"><span title="Remove ALL" class='fa fa-minus-circle fa-2x right error' onclick='delMsg("all")'></span>message</td>
+            <td class="span4"><span title="Remove ALL" class='fa fa-minus-circle fa-2x right error button' onclick='delMsg("all")'></span>message</td>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
             function(messages){
                 if(messages.length !== 0){
                     $.each(messages, function(i, d){
-                        tbody.append("<tr><td class='span2'>"+d.date+"</td><td class='span4'>"+d.email+"</td><td class='span2'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error' onclick='delMsg("+d.id+")'></span>"+d.message+"</td></tr>");
+                        tbody.append("<tr><td class='span2'>"+d.date+"</td><td class='span4'>"+d.email+"</td><td class='span2'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error button' onclick='delMsg("+d.id+")'></span>"+d.message+"</td></tr>");
                     });
                 }else{
                     tbody.append("<tr><td class='span12'>No message to show.</td></tr>");
@@ -51,23 +51,6 @@
                     });
 
         });
-    }
-    function popup(data, callback){
-        $('#popup').empty();
-        $('#popup').append("<span class='error'>"+data+"</span>");
-        $('#popup').append("<span id='confirm' class='button'> Yes</span><span id='notConfirm' class='button'> No</span>");
-        $('#confirm').on("click", function(){
-            $('#popup').empty();
-            callback();
-        });
-        $('#notConfirm').on("click", function(){
-            $('#popup').empty();
-            return false;
-        });
-    }
-    function say(data){
-        $('#popup').empty();
-        $('#popup').append("<span class='error'>"+data+"</span>");
     }
     $(document).ready(function(){
         getMessages();

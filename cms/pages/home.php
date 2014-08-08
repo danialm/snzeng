@@ -23,4 +23,10 @@
             <a href="?cmd=job" class="span12">Jobs</a>  
         </div>
     </div>
+    <div class="span6">
+        <div class="nav">
+            <a href="?cmd=users" class="span12"><span class="fa fa-users fa-4x"></span></a>  
+            <a href="?cmd=users" class="span12">Users Manager</a>  
+        </div>
+    </div>
 </div>

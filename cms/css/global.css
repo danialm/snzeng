@@ -14,14 +14,21 @@ thead{
     text-transform: uppercase;
     font-weight: bold;
 }
+thead input{
+    color: #000;
+    font-weight: normal;
+}
 thead tr{
-        background-color: #0c83e7;
+        background-color: #0c83e7 !important;
 }
 tr{
     background-color: #E5FFF8;
 }
 tr:nth-child(2n){
     background-color: #BEFFED;
+}
+td.edit-form{
+    display: none;
 }
 .button{
     padding: 3px;
@@ -68,6 +75,12 @@ tr:nth-child(2n){
 }
 .error{
     color: red;
+}
+.add{
+    color: darkgreen;
+}
+.edit{
+    color: blue;
 }
 .breadcrumb{
     background-color: inherit;

@@ -30,9 +30,20 @@ if(isset($_POST['inq'])){
         $contacts_info = get_contacts_info();
         echo json_encode($contacts_info);
     }
-
     if($_POST['inq'] === 'delMsg'){
         $res = delete_message($_POST['id']);
+        echo $res;
+    }
+    if($_POST['inq'] === 'users'){
+        $users_info = get_users_info();
+        echo json_encode($users_info);
+    }
+    if($_POST['inq'] === 'delUsr'){
+        $res = delete_user($_POST['id']);
+        echo $res;
+    }
+    if($_POST['inq'] === 'editUsr'){
+        $res = edit_user($_POST['user']);
         echo $res;
     }
 }
