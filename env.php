@@ -1,6 +1,6 @@
 <?php
 
-define('TEST_ENV_EMAIL', 'gdanialq@gmail.com');
+//define('TEST_ENV_EMAIL', 'gdanialq@gmail.com');
 define('DOMAIN', 'localhost');
 define('EMAIL', defined('TEST_ENV_EMAIL')? TEST_ENV_EMAIL : 'shawnk@snzeng.com');
 define('DB_NAME', 'snzeng');
