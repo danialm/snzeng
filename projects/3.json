@@ -1,16 +1,20 @@
 {
    "id": "3",
-   "name": "",
-   "description": "",
+   "name": "Contemporary House",
+   "description": "Located in Venice, California; this property was completed in 2014. S&Z Engineering, delivered structural design to the celebrated, H.Majd Design Group.",
    "images": [
        "img/projects/project3.0.jpg", 
        "img/projects/project3.1.jpg"
    ],
-   "plot":"img/projects/project3.5.pdf",
-   "spec": {
-       "type":"",
-       "Area":"",
-       "Year of Design":"",
-       "Year of Completion":""
+    "drawing": "img/projects/project3.draw.pdf",
+    "address": {
+        "street": "Westwood",
+        "city": "CA"
+    },
+    "spec": {
+        "Type": "Residential",
+        "Year of Design": "2013",
+        "Architect": "H.Majd Design Group",
+        "Area": "Area: 3,838 sq. ft."
     }
 }

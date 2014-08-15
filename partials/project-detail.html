@@ -1,23 +1,28 @@
 <div id="left">
     <h1 class="title" ng-bind="project.name"></h1>
-    <p ng-bind="project.description"></p>
+    <p>
+        <span ng-bind="project.description"></span>
+        <span ng-if="project.drawing">You can see the drawing <a href="{{project.drawing}}" target="blank" >here</a>.</span>
+    </p>
     <ul class="specs">
-      <li ng-repeat="(key, val) in project.spec">
-        <span class="title">{{key}}</span>: <span>{{val}}</span>
-      </li>      
+        <li>
+            <span class="title">location: </span><span ng-bind="project.address.street"></span>, <span ng-bind="project.address.city"></span>
+        </li>  
+        <li ng-repeat="(key, val) in project.spec">
+            <span class="title">{{key}}</span>: <span>{{val}}</span>
+        </li>      
     </ul>
-    <p ng-if="project.plot">You can see the plot <a href="{{project.plot}}" target="blank" >here</a>.<p>
 </div>
 <div id="right">
     <div class="project-images">
-    <img ng-src="{{img}}"
-       class="project"
-       ng-repeat="img in project.images"
-       ng-class="{active: mainImageUrl==img}">
+        <img ng-src="{{img}}"
+             class="project"
+             ng-repeat="img in project.images"
+             ng-class="{active: mainImageUrl == img}">
     </div>
     <ul class="project-thumbs">
-      <li ng-repeat="img in project.images">
-        <img ng-src="{{img}}" ng-click="setImage(img)">
-      </li>
+        <li ng-repeat="img in project.images">
+            <img ng-src="{{img}}" ng-click="setImage(img)">
+        </li>
     </ul>
 </div>

@@ -22,7 +22,7 @@ snzengControllers.controller('projectsListCtrl', ['$scope', 'projects',
     changeNav("projects");
     $scope.pageClass = 'projectsList';
     $scope.projects = projects.query();
-    $scope.orderProp = 'age';
+    $scope.orderProp = 'order';
   }]);
 
 snzengControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', 'projects',
@@ -44,7 +44,7 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
     $scope.office = office.query();
     
     $scope.submit = function(user){
-                        if(user === undefined){// || user.name === '' || user.email === '' || user.message ===''){
+                        if(user === undefined){
                             $scope.result ={ 'val':'Pleaes fill out the form!',
                                              'class':'error',
                                              'icon':'fa fa-exclamation fa-2x' 
@@ -77,8 +77,8 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                                              'icon':'fa fa-cog fa-spin fa-2x'
                                          };
                                          
-                        $http.get('/ajax.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message )
-                                                        .success(function(data){ 
+                        $http.get('/email.php?from=contact_us&name='+user.name+'&email='+user.email+'&message='+user.message ).success(function(data){
+                                                                    
                                                                     if(data == 1){
                                                                         $scope.result ={    
                                                                                         'val':'Cool! Get back to you soon.',
@@ -101,6 +101,7 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                         return true;
                    };                      
   }]);
+  
 snzengControllers.controller('aboutCtrl', ['$scope',
   function($scope) {
     changeNav('about');      

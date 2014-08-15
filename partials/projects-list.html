@@ -6,14 +6,16 @@
         <span class="title">Sort by: </span>
         <select ng-model="orderProp">
             <option value="name">Alphabetical</option>
-            <option value="age">Newest</option>
+            <option value="year">By Year</option>
+            <option value="type">By Type</option>
         </select>
     </div>
     
 </div>
 <div id="right">
     <ul class="projects">
-      <li ng-repeat="project in projects | filter:query | orderBy:orderProp"
+      <li ng-hide="filterdProjects.length">No match found!</li>
+      <li ng-repeat="project in filterdProjects = ( projects | filter:query | orderBy:orderProp)"
           class="thumbnail phone-listing">
         <a href="#/projects/{{project.id}}" class="thumb"><img ng-src="{{project.imageUrl}}"></a>
         <a href="#/projects/{{project.id}}"><h4 class="title">{{project.name}}</h4></a>

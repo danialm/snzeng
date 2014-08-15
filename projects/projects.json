@@ -1,23 +1,38 @@
 [
     {
-        "age": 1, 
+        "year": 2010,
+        "order": 1,
+        "type": "Residential",
         "id": "1", 
-        "imageUrl": "img/projects/project1.0.jpg", 
-        "name": "Modern Costume House", 
-        "snippet": "Located at Brentwood, California, this modern house with was built in 2013. S & Z Engineering, provided structural engineering to a longtime client on the design. This building has been focus of different magazine and architectural communities."
+        "imageUrl": "img/projects/project1.0_thumb.jpg", 
+        "name": "Modern Custom House", 
+        "snippet": "Located in Brentwood, California, this modern house has been highlighted of different magazines and architectural communities."
     },
     {
-        "age": 2, 
+        "year": 2012,
+        "order": 2,
+        "type": "Commercial",
         "id": "2", 
-        "imageUrl": "img/projects/project2.0.jpg", 
-        "name": "", 
-        "snippet": ""
+        "imageUrl": "img/projects/project2.0_thumb.jpg", 
+        "name": "Facade Upgrade", 
+        "snippet": "Located in Westwood, California, this aluminum facade was added in 2012. Architect: Marcello Pozzi."
     },
     {
-        "age": 3, 
+        "year": 2013,
+        "order": 3,
+        "type": "Residential",
         "id": "3", 
-        "imageUrl": "img/projects/project3.0.jpg", 
-        "name": "", 
-        "snippet": ""
+        "imageUrl": "img/projects/project3.0_thumb.jpg", 
+        "name": "Contemporary House", 
+        "snippet": "S&Z Engineering delivered structural design to the celebrated, H.Majd Design Group."
+    },
+    {
+        "year": 2010,
+        "order": 4, 
+        "id": "4",
+        "type": "Mechanical",
+        "imageUrl": "img/projects/project4.0_thumb.jpg", 
+        "name": "Heat Exchanger Frame", 
+        "snippet": "S&Z Engineering provides seismic resistance steel frame for mechanical units."
     }
 ]

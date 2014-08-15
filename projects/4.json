@@ -1,0 +1,20 @@
+{
+    "id": "4",
+    "name": "Heat Exchanger Frame",
+    "description": "Spirax _Sarco is a well-known international company which produces costume mechanical units. S&Z Engineering provides seismic resistance steel frame for mechanical units. We have been working with Spirax-Sarco USA since 2010.",
+    "images": [
+        "img/projects/project4.0.jpg",
+        "img/projects/project4.1.jpg",
+        "img/projects/project4.2.jpg"
+    ],
+    "drawing": "img/projects/project4.draw.pdf",
+    "address": {
+        "street": "San Fransisco",
+        "city": "CA"
+    },
+    "spec": {
+        "type": "Mechanical",
+        "Year of Design": "2010"
+    }
+}
+

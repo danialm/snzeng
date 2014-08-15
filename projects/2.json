@@ -1,7 +1,7 @@
 {
    "id": "2",
-   "name": "",
-   "description": "",
+   "name": "Facade Upgrade",
+   "description": "Located in Westwood, California, this aluminum facade was added in 2012. S&Z Engineering delivered structural engineering to the celebrated architect, Marcello Pozzi.",
    "images": [
        "img/projects/project2.0.jpg", 
        "img/projects/project2.1.jpg", 
@@ -9,11 +9,14 @@
        "img/projects/project2.3.jpg",
        "img/projects/project2.4.jpg"
    ],
-   "plot":"img/projects/project2.5.jpg",
-   "spec": {
-       "type":"Commercial",
-       "Area":"",
-       "Year of Design":"",
-       "Year of Completion":""
+    "drawing": "img/projects/project2.draw.jpg",
+    "address": {
+        "street": "Westwood",
+        "city": "CA"
+    },
+    "spec": {
+        "type": "Commercial",
+        "Year of Design": "2012",
+        "Architect": "Marcello Pozzi"
     }
 }

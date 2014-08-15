@@ -161,6 +161,14 @@ h3{
     -o-background-size: cover;
     background-size: cover;
 }
+.home .top-corner{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    margin: 270px 0 0 30px;
+    color: #FFF;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
 .home .corner{
     position: absolute;
     bottom: 50px;
@@ -209,6 +217,9 @@ h3{
     display: inline-block;
 }
 @media screen and (max-width: 1070px){
+    .home .top-corner{
+        display: none;
+    }
     .home .corner{
         width: 100%;
         right: 0;
