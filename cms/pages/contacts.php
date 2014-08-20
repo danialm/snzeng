@@ -1,6 +1,3 @@
-<?php 
-//$contacts_info = get_contacts_info();
-?>
 <span id="popup" class="right"></span>
 <h2><?= $pg['name'] ?></h2>
 <table id="contacts">

@@ -46,4 +46,12 @@ if(isset($_POST['inq'])){
         $res = edit_user($_POST['user']);
         echo $res;
     }
+    if($_POST['inq'] === 'office'){
+        $res = get_office_info();
+        echo json_encode($res);
+    }
+    if($_POST['inq'] === 'editOfficeInfo'){
+        $res = edit_office_info($_POST['pair']);
+        echo $res;
+    }
 }

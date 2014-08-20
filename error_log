@@ -6,3 +6,16 @@
 [07-Aug-2014 18:15:05 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
 [07-Aug-2014 18:15:16 UTC] PHP Fatal error:  Call to undefined function delete_users() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 42
 [08-Aug-2014 20:52:32 UTC] PHP Fatal error:  Call to undefined function mysqli_fetch() in /home/admindanial/public_html/snzeng/cms/functions.php on line 58
+[20-Aug-2014 22:13:21 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:13:46 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:15:07 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:15:17 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:15:24 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:15:29 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:16:00 UTC] PHP Fatal error:  Call to undefined function edit_office_info() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 54
+[20-Aug-2014 22:24:12 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home/admindanial/public_html/snzeng/cms/functions.php on line 199
+[20-Aug-2014 22:24:48 UTC] PHP Fatal error:  Access to undeclared static property: stdClass::$pair in /home/admindanial/public_html/snzeng/cms/functions.php on line 199
+[20-Aug-2014 22:25:37 UTC] PHP Fatal error:  Access to undeclared static property: stdClass::$key in /home/admindanial/public_html/snzeng/cms/functions.php on line 200
+[20-Aug-2014 22:27:07 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 200
+[20-Aug-2014 22:27:41 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 200
+[20-Aug-2014 23:04:24 UTC] PHP Fatal error:  Call to undefined function var_dupm() in /home/admindanial/public_html/snzeng/cms/functions.php on line 183

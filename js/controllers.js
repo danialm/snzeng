@@ -42,7 +42,6 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
     changeNav('contact');      
     $scope.pageClass = 'contact';
     $scope.office = office.query();
-    
     $scope.submit = function(user){
                         if(user === undefined){
                             $scope.result ={ 'val':'Pleaes fill out the form!',
@@ -102,10 +101,11 @@ snzengControllers.controller('contactCtrl', ['$scope', 'office', '$http',
                    };                      
   }]);
   
-snzengControllers.controller('aboutCtrl', ['$scope',
-  function($scope) {
+snzengControllers.controller('aboutCtrl', ['$scope', 'office',
+  function($scope, office) {
     changeNav('about');      
     $scope.pageClass = 'about';
+    $scope.office = office.query();
   }]);
   
 snzengControllers.controller('jobsCtrl', ['$scope', 'files',

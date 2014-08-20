@@ -49,7 +49,6 @@ function get_message($obj){
  * 
  */
 function sign_in($usrn, $psw){
-
     $con = connect_db();
     if($con){
         $q = "SELECT name FROM users WHERE admin= '1' AND email= '" . $usrn . "' AND password= '" . $psw . "'" ;
@@ -167,6 +166,39 @@ function edit_user($user){
         }
         $res = mysqli_query($con,$q);
         return $res;
+    }else{
+        return false;
+    }
+}
+
+/*
+ * this function get the information from /office/office.json.
+ * 
+ */
+function get_office_info(){
+    $out = array();
+    $office_file = str_replace("cms", "office/office.json", dirname(__FILE__));
+    $office = json_decode(file_get_contents($office_file));
+    foreach($office as $k => $v){
+        $temp = array(
+            'key' => $k,
+            'value' => $v
+        );
+        array_push($out, $temp);
+    }
+    return $out;
+}
+/*
+ * this function edit the information on /office/office.json.
+ * 
+ */
+function edit_office_info($pair){
+    $office_file = str_replace("cms", "office/office.json", dirname(__FILE__));
+    $office = (array) json_decode(file_get_contents($office_file));
+    $office[$pair['key']] = $pair['value'];
+    $data = json_encode($office);
+    if(file_put_contents($office_file, $data)){
+        return true;
     }else{
         return false;
     }
