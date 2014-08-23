@@ -24,7 +24,6 @@ if($_GET['from']){
     }
     echo $result;
 }
-
 if(isset($_POST['inq'])){
     if($_POST['inq'] === 'contacts'){
         $contacts_info = get_contacts_info();
@@ -52,6 +51,12 @@ if(isset($_POST['inq'])){
     }
     if($_POST['inq'] === 'editOfficeInfo'){
         $res = edit_office_info($_POST['pair']);
+        echo $res;
+    }
+}
+if(isset($_FILES) && count($_FILES)>0){
+    foreach($_FILES as $des => $file){
+        $res = save_file($des, $file);
         echo $res;
     }
 }

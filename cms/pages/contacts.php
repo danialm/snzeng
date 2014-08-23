@@ -38,6 +38,8 @@
                     .success(function(data){
                         if(!data){
                             say("The message is not deleted!");
+                        }else{
+                            say("");
                         }
                     })
                     .fail(function() {

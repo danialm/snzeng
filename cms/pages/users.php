@@ -42,6 +42,8 @@
                     .success(function(data){
                         if(!data){
                             say("The user is not deleted!");
+                        }else{
+                            say("");
                         }
                     })
                     .fail(function() {
@@ -67,6 +69,8 @@
                                 .success(function(data){
                                     if(!data){
                                         say("The user is not edited!");
+                                    }else{
+                                        say("");
                                     }
                                 })
                                 .fail(function() {
@@ -92,6 +96,8 @@
                                 .success(function(data){
                                     if(!data){
                                         say("The user is not added!");
+                                    }else{
+                                        say("");
                                     }
                                 })
                                 .fail(function() {

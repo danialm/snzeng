@@ -19,8 +19,13 @@
             function(officeInfo){
                 if(officeInfo.length !== 0){
                     $.each(officeInfo, function(i, d){
-                        tbody.append("<tr id='"+i+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span>"+d.value+"</td>\n\
-                                                         <td class='span4 edit-form key'>"+d.key+"</td><td class='span8 edit-form'><span title='Save' class='fa fa-check-circle right add button' onclick='editOfficeInfo("+i+")'></span><input style='width: 90%' type='text' name='value' value='"+d.value+"' ></input></td></tr>");
+                        if(d.key.indexOf("Img")>=0){
+                            tbody.append("<tr id='"+i+"' data-src='"+d.value+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span><img height='30' src='"+d.value+"' /></td>\n\
+                                                         <td class='span4 edit-form key'>"+d.key+"</td><td class='span8 edit-form'><span title='Save' class='fa fa-check-circle right add button' onclick='editOfficeInfo("+i+")'></span><form enctype='multipart/form-data'><input style='width: 90%' type='file' name='"+d.value+"'></input></form></td></tr>");
+                        }else{
+                         tbody.append("<tr id='"+i+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span>"+d.value+"</td>\n\
+                                                      <td class='span4 edit-form key'>"+d.key+"</td><td class='span8 edit-form'><span title='Save' class='fa fa-check-circle right add button' onclick='editOfficeInfo("+i+")'></span><input style='width: 90%' type='text' name='value' value='"+d.value+"' ></input></td></tr>");   
+                        }                 
                     });
                 }else{
                     tbody.append("<tr><td class='span12'>No information to show.</td></tr>");
@@ -32,22 +37,61 @@
     }
     function editOfficeInfo(id){
         var tr = $("tr#"+id);
-        var pair ={
-            "key"        : tr.find("td.key").text(),
-            "value"      : tr.find("input[name='value']").val()
-        };
-        $.post( "ajax.php", {"inq":"editOfficeInfo", "pair":pair})
-                            .success(function(data){
-                                if(!data){
-                                    say("The user is not edited!");
-                                }
-                            })
-                            .fail(function() {
-                              say("Cannot connect to database. The user is not edited!");
-                            })
-                            .always(function(){
-                                getOfficeInfo();
-                            });
+        if(tr.attr("data-src")){//this statement takes care of images.
+            var formData = new FormData(tr.find("form")[0]);
+            
+            $.ajax({
+                url: 'ajax.php',  //Server script to process data
+                type: 'POST',
+                xhr: function() {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // Check if upload property exists
+                        myXhr.upload.addEventListener('progress',function(){// For handling the progress of the upload
+                            tr.find("span.fa").removeClass("fa-check-circle button").addClass("fa-cog fa-lg fa-spin");
+                        }, false); 
+                    }
+                    return myXhr;
+                },
+                success: function(data){
+                                    if(!data){
+                                        say("The information is not edited! Please select an under 1Mb PNG file.");
+                                        tr.find("span.fa").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin");
+                                    }else{
+                                        say("");
+                                        getOfficeInfo();
+                                    }
+                },
+                error: function(){
+                    say("Cannot connect to database. The information is not edited!");
+                    tr.find("span.fa").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin");
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }else{
+            var pair ={
+                "key"        : tr.find("td.key").text(),
+                "value"      : tr.find("input[name='value']").val()
+            };
+            $.post( "ajax.php", {"inq":"editOfficeInfo", "pair":pair})
+                                .success(function(data){
+                                    if(!data){
+                                        say("The information is not edited!");
+                                    }else{
+                                        say("");
+                                    }
+                                })
+                                .fail(function() {
+                                  say("Cannot connect to database. The information is not edited!");
+                                })
+                                .always(function(){
+                                    getOfficeInfo();
+                                });
+        }
     }
     $(document).ready(function(){
         getOfficeInfo();

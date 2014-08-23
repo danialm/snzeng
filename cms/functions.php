@@ -203,3 +203,21 @@ function edit_office_info($pair){
         return false;
     }
 }
+/*
+ * converts the image from $pair[vakue] to png and save it to $pair[key].
+ * 
+ */
+function save_file($des, $file){
+    $allowedExts = array("png");
+    $temp = explode(".", $file["name"]);
+    $extension = end($temp);
+    if (($file["type"] == "image/png")
+        && ($file["size"] < 1000000)
+        && in_array($extension, $allowedExts)
+        && $file["error"] === 0 ) {
+            move_uploaded_file($file["tmp_name"], str_replace("_", ".", $des));
+            return true;
+    } else {
+        return false;
+    }
+}
