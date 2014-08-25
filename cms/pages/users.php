@@ -8,7 +8,7 @@
         <tr>
             <td class="span4">name</td>
             <td class="span4">email</td>
-            <td class="span4"><span title="Remove ALL" class='fa fa-minus-circle fa-2x button right error' onclick='delUsr("all")'></span><span title="Add user" class='fa fa-plus-circle fa-2x right add button' onclick='showEdit("new")'></span>password</td>
+            <td class="span4"><span title="Remove ALL" class='fa fa-minus-circle fa-2x button right error' onclick='delUsr("all")'></span><span title="Add user" class='fa fa-plus-circle fa-2x right add button' onclick='showAdd()'></span>password</td>
         </tr>
     </thead>
     <tbody>
@@ -107,6 +107,9 @@
                                     getUsers();
                                 });            
         }
+    }
+    function showAdd(){
+        $("thead").append("<tr><td class='span4'><label for='admin' class='right'>Admin</label><input type='checkbox' id='admin' name='admin' class='right'></input><input type='text' name='name' ></input></td><td class='span4'><input type='email' name='email' ></input></td><td class='span4'><span title='Save' class='fa fa-times right error button' onclick='$(this).closest(\"tr\").slideUp().remove(); $(\"#popup\").empty();'></span><span title='Save' class='fa fa-check-circle right add button' onclick='addUsr(this)'></span><input type='text' name='password' ></input></td></tr>").slideDown();
     }
     $(document).ready(function(){
         getUsers();

@@ -204,6 +204,31 @@ function edit_office_info($pair){
     }
 }
 /*
+ * gets the projects information from tabels projects and projec_spec.
+ * 
+ */
+function get_projects_info(){
+    $con = connect_db();
+    if($con){
+        $out = array();
+        $q = "SELECT * FROM projects";
+        $res = mysqli_query($con,$q);
+        while($row = mysqli_fetch_array($res)){
+            $specs = array();
+            $qa = "SELECT name, value FROM project_spec WHERE project_id=" . $row['id'];
+            $resa = mysqli_query($con,$qa);
+            while($spec = mysqli_fetch_array($resa)){
+                array_push($specs, $spec);
+            }
+            $row['spec'] = $specs;
+            array_push($out, $row);
+        }
+        return $out;
+    }else{
+        return false;
+    }
+}
+/*
  * converts the image from $pair[vakue] to png and save it to $pair[key].
  * 
  */

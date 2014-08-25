@@ -53,6 +53,10 @@ if(isset($_POST['inq'])){
         $res = edit_office_info($_POST['pair']);
         echo $res;
     }
+    if($_POST['inq'] === 'projects'){
+        $res = get_projects_info();
+        echo json_encode($res);
+    }
 }
 if(isset($_FILES) && count($_FILES)>0){
     foreach($_FILES as $des => $file){
