@@ -6,6 +6,9 @@
 .header, .footer{
     background-color: #0c83e7;
 }
+input[type=file]{
+    display: inline-block;
+}
 table, thead, tbody, tfoot, tr{
     width: 100%;
 }
@@ -123,6 +126,17 @@ form#sign-in input[type=submit]{
     padding-top: 30px;
     padding-bottom: 30px;
 }
+#project input,#project textarea{
+    width: 80%;
+}
+#project textarea{
+    height: 130px;
+}
+#project span{
+    vertical-align: top;
+}
+
+
 
 @media screen and (max-width: 900px){
     .inner{
