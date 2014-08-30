@@ -188,6 +188,7 @@ function get_office_info(){
     }
     return $out;
 }
+
 /*
  * this function edit the information on /office/office.json.
  * 
@@ -203,6 +204,7 @@ function edit_office_info($pair){
         return false;
     }
 }
+
 /*
  * gets the projects information from tabels projects and projec_spec.
  * 
@@ -228,21 +230,58 @@ function get_projects_info(){
         return false;
     }
 }
+
+/*
+ * add a project to the table projects with default values.
+ * 
+ */
+function add_project($prj){
+    $con = connect_db();
+    if($con){
+        $q = "INSERT INTO projects (id, name)"
+               . " VALUES ('" . $prj['id'] . "', '" . $prj['name'] . "')";
+        $res = mysqli_query($con,$q);
+        return $res;
+    }else{
+        return false;
+    }
+}
+
+/*
+ * remove a project from table projects and its spec from table project_spec.
+ * 
+ */
+function delete_project($id){
+    $con = connect_db();
+    if($con){
+        $q = "DELETE from projects WHERE id= " . $id; 
+        $res1 = mysqli_query($con,$q);
+        $q = 
+        $q = "DELETE from project_spec WHERE project_id= " . $id;
+        $res2 = mysqli_query($con,$q);
+        return $res1 && $res2;
+    }else{
+        return false;
+    }
+}
+
 /*
  * converts the image from $pair[vakue] to png and save it to $pair[key].
  * 
  */
 function save_file($des, $file){
-    $allowedExts = array("png");
-    $temp = explode(".", $file["name"]);
-    $extension = end($temp);
-    if (($file["type"] == "image/png")
-        && ($file["size"] < 1000000)
-        && in_array($extension, $allowedExts)
-        && $file["error"] === 0 ) {
-            move_uploaded_file($file["tmp_name"], str_replace("_", ".", $des));
-            return true;
-    } else {
-        return false;
-    }
+    var_dump($des);
+    var_dump($file);
+//    $allowedExts = array("png");
+//    $temp = explode(".", $file["name"]);
+//    $extension = end($temp);
+//    if (($file["type"] == "image/png")
+//        && ($file["size"] < 1000000)
+//        && in_array($extension, $allowedExts)
+//        && $file["error"] === 0 ) {
+//            move_uploaded_file($file["tmp_name"], str_replace("_", ".", $des));
+//            return true;
+//    } else {
+//        return false;
+//    }
 }

@@ -41,7 +41,7 @@
             var formData = new FormData(tr.find("form")[0]);
             
             $.ajax({
-                url: 'ajax.php',  //Server script to process data
+                url: 'ajax.php?inc=office',  //Server script to process data
                 type: 'POST',
                 xhr: function() {  // Custom XMLHttpRequest
                     var myXhr = $.ajaxSettings.xhr();

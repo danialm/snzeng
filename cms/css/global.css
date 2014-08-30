@@ -135,7 +135,9 @@ form#sign-in input[type=submit]{
 #project span{
     vertical-align: top;
 }
-
+#project .spec input{
+    width: 45%;
+}
 
 
 @media screen and (max-width: 900px){

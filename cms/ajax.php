@@ -57,10 +57,30 @@ if(isset($_POST['inq'])){
         $res = get_projects_info();
         echo json_encode($res);
     }
-}
-if(isset($_FILES) && count($_FILES)>0){
-    foreach($_FILES as $des => $file){
-        $res = save_file($des, $file);
+    if($_POST['inq'] === 'addPrj'){
+        $res = add_project($_POST['prj']);
         echo $res;
+    }
+    if($_POST['inq'] === 'delPrj'){
+        $res = delete_project($_POST['id']);
+        echo $res;
+    }
+}
+if(isset($_GET['inq'])){
+    if($_GET['inq'] === 'office')
+    if(isset($_FILES) && count($_FILES)>0){
+        foreach($_FILES as $des => $file){
+            $res = save_file($des, $file);
+            echo $res;
+        }
+    }
+}
+if(isset($_GET['inq'])){
+    if($_GET['inq'] === 'addPrj')
+    if(isset($_FILES) && count($_FILES)>0){
+        foreach($_FILES as $des => $file){
+            $res = save_file($des, $file);
+            echo $res;
+        }
     }
 }
