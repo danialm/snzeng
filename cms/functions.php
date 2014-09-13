@@ -256,7 +256,6 @@ function delete_project($id){
     if($con){
         $q = "DELETE from projects WHERE id= " . $id; 
         $res1 = mysqli_query($con,$q);
-        $q = 
         $q = "DELETE from project_spec WHERE project_id= " . $id;
         $res2 = mysqli_query($con,$q);
         return $res1 && $res2;
@@ -270,6 +269,26 @@ function delete_project($id){
  * 
  */
 function save_file($des, $file){
+    $allowedExts = array("jpg", "jpeg", "png", "pdf");
+    $allowedType = array("image/jpeg", "image/jpg", "image/pjpeg" , "image/png", "image/x-png", "text/pdf");
+    $temp = explode(".", $file["name"]);
+    $path = str_replace("_", ".", $des).".jpg";
+    $extension = strtolower ( end($temp) );
+    if (   in_array($file["type"], $allowedType) 
+        && $file["size"] < 1500000
+        && in_array($extension, $allowedExts)
+        && $file["error"] === 0 ) {
+        if (!file_exists($path)) {
+           // var_dump($path);
+            file_put_contents($path, file_get_contents("img/def.jpg"));
+        }
+        move_uploaded_file($file["tmp_name"], $path);
+        return true;
+    } else {
+        return false;
+    }
+}
+function save_file_test($des, $file){
     var_dump($des);
     var_dump($file);
 //    $allowedExts = array("png");

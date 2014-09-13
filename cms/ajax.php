@@ -67,20 +67,13 @@ if(isset($_POST['inq'])){
     }
 }
 if(isset($_GET['inq'])){
-    if($_GET['inq'] === 'office')
     if(isset($_FILES) && count($_FILES)>0){
         foreach($_FILES as $des => $file){
             $res = save_file($des, $file);
             echo $res;
         }
     }
-}
-if(isset($_GET['inq'])){
-    if($_GET['inq'] === 'addPrj')
-    if(isset($_FILES) && count($_FILES)>0){
-        foreach($_FILES as $des => $file){
-            $res = save_file($des, $file);
-            echo $res;
-        }
+    if($_GET['inq'] === 'editPrj'){
+        //echo $_POST;
     }
 }

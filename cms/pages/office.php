@@ -20,7 +20,7 @@
                 if(officeInfo.length !== 0){
                     $.each(officeInfo, function(i, d){
                         if(d.key.indexOf("Img")>=0){
-                            tbody.append("<tr id='"+i+"' data-src='"+d.value+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span><img height='30' src='"+d.value+"' /></td>\n\
+                            tbody.append("<tr id='"+i+"' data-src='"+d.value+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span><img height='30' src='"+d.value+".jpg' /></td>\n\
                                                          <td class='span4 edit-form key'>"+d.key+"</td><td class='span8 edit-form'><span title='Save' class='fa fa-check-circle right add button' onclick='editOfficeInfo("+i+")'></span><form enctype='multipart/form-data'><input style='width: 90%' type='file' name='"+d.value+"'></input></form></td></tr>");
                         }else{
                          tbody.append("<tr id='"+i+"'><td class='span4'>"+d.key+"</td><td class='span8'><span title='Edit' class='fa fa-edit button right edit' onclick=\"showEdit('"+i+"')\"></span>"+d.value+"</td>\n\
@@ -41,7 +41,7 @@
             var formData = new FormData(tr.find("form")[0]);
             
             $.ajax({
-                url: 'ajax.php?inc=office',  //Server script to process data
+                url: 'ajax.php?inq=office',  //Server script to process data
                 type: 'POST',
                 xhr: function() {  // Custom XMLHttpRequest
                     var myXhr = $.ajaxSettings.xhr();

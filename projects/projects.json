@@ -34,5 +34,14 @@
         "imageUrl": "img/projects/project4.thumb.jpg", 
         "name": "Heat Exchanger Frame", 
         "snippet": "S&Z Engineering provides seismic resistance steel frame for mechanical units."
+    },
+    {
+        "year": 2014,
+        "order": 6, 
+        "id": "6",
+        "type": "Movie",
+        "imageUrl": "img/projects/project6.thumb.jpg", 
+        "name": "Staging Structure", 
+        "snippet": "S&Z Engineering provides safty evaluation for movie stage structure."
     }
 ]

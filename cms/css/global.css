@@ -40,6 +40,12 @@ td.edit-form{
     background: #aaa;
     border: solid 1px #888;
     border-radius: 3px;
+    cursor: pointer;
+}
+.buttonish{
+    padding: 3px;
+    margin: 4px;
+    display: inline-block;
 }
 .button:active{
     background: #888;
@@ -126,7 +132,7 @@ form#sign-in input[type=submit]{
     padding-top: 30px;
     padding-bottom: 30px;
 }
-#project input,#project textarea{
+#project input:not([type='checkbox']),#project textarea{
     width: 80%;
 }
 #project textarea{

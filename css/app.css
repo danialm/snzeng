@@ -391,7 +391,7 @@ ul.specs {
 }
 ul.specs > li{
   display: inline-block;
-  width: 200px;
+  width: 100%;
   vertical-align: top;
 }
 .projectDetail #left ul{

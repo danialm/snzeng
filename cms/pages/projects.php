@@ -24,12 +24,16 @@
             function(project){
                 if(project.length !== 0){
                     $.each(project, function(i, d){
-                        tbody.append("<tr id='"+d.id+"'><td class='span2'>"+d.id+"</td><td class='span6'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error button' onclick='delProject("+d.id+")'></span><span title='Edit' class='fa fa-edit button right edit' onclick='showEdit("+d.id+")'></span><img src='img/projects/project"+d.id+".thumb.jpg' height='30' alt='"+d.name+" thumbnail'/></td>\n\
-                                                        <td class='edit-form'><form id='editPrj' enctype='multipart/form-data'><span class='span2'>id:<input type='text' name='id' value='"+d.id+"' /></span><span class='span4'>name:<input type='text' name='name' value='"+d.name+"' /></span><span  class='span6'><span title='Save' class='fa fa-check-circle fa-2x right add button' onclick='editProject("+d.id+")'></span>thumb:<input type='file' name='project"+d.id+".thumb' /></span>\n\
+                        tbody.append("<tr id='"+d.id+"'><td class='span2'>"+d.id+"</td><td class='span6'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error button' onclick='delProject("+d.id+")'></span><span title='Edit' class='fa fa-edit button right edit' onclick='showEdit("+d.id+")'></span><img src='img/projects/project"+d.id+".thumb.jpg' height='30' alt='projects "+d.name+" thumbnail'/></td>\n\
+                                                        <td class='edit-form'><form id='editPrj' enctype='multipart/form-data'><span class='span2'>id:<input type='text' name='id' value='"+d.id+"' /></span><span class='span4'>name:<input type='text' name='name' value='"+d.name+"' /></span><span  class='span6'><span title='Save' class='fa fa-check-circle fa-2x right add button spin' onclick='editProject("+d.id+")'></span>thumb:<input type='file' name='img/projects/project"+d.id+".thumb' /></span>\n\
                                                                                                                   <span class='span3'>year:<input type='text' name='year' value='"+d.year+"' /></span><span class='span3'>order:<input type='text' name='order' value='"+d.order+"' /></span><span class='span4'>address:<input type='text' name='city' value='"+d.address+"' /></span><span class='span2'><select name='type"+d.id+"'><option value='mov'>movie</option><option value='res'>residential</option><option value='com'>comercial</option><option value='apt'>apt/condo</option><option value='fac'>facade</option><option value='nbu'>non-building</option></select></span>\n\
                                                                                                                   <span class='span6'>snippet:<textarea name='snipt'>"+d.snippet+"</textarea></span><span class='span6'>description:<textarea name='description'>"+d.description+"</textarea></span>\n\
-                                                                                                                  <span class='span12'>images:</span><span class='span4' >1. <input type='file' name='project"+d.id+".0' /></span><span class='span4' >2. <input type='file' name='project"+d.id+".1' /></span><span class='span4' >3. <input type='file' name='project"+d.id+".2' /></span>\n\
-                                                                                                                                                     <span class='span4' >4. <input type='file' name='project"+d.id+".3' /></span><span class='span4' >5. <input type='file' name='project"+d.id+".4' /></span><span class='span4' >6. <input type='file' name='project"+d.id+".5' /></span>\n\
+                                                                                                                  <span class='span12'>images:</span><span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='0' /></span>1. <input type='file' name='img/projects/project"+d.id+".0' /><img src='img/projects/project"+d.id+".0.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='1' /></span>2. <input type='file' name='img/projects/project"+d.id+".1' /><img src='img/projects/project"+d.id+".1.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='2' /></span>3. <input type='file' name='img/projects/project"+d.id+".2' /><img src='img/projects/project"+d.id+".2.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='3' /></span>4. <input type='file' name='img/projects/project"+d.id+".3' /><img src='img/projects/project"+d.id+".3.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='4' /></span>5. <input type='file' name='img/projects/project"+d.id+".4' /><img src='img/projects/project"+d.id+".4.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input title='Remove Image' type='checkbox' name='remove' value='5' /></span>6. <input type='file' name='img/projects/project"+d.id+".5' /><img src='img/projects/project"+d.id+".5.jpg' height='30' alt='project "+d.name+" image'/></span>\n\
                                                                                                                   <span class='span12'><span title='Add Specification' class='fa fa-plus-circle right add button' onclick='addSpec("+d.id+")'></span>specifications:</span><span id='spec"+d.id+"' class='spec'></span>\n\
                                                                               </form></td></tr>");
                         $('select[name="type'+d.id+'"] option[value="'+d.type+'"]').attr("selected","selected");                                                                              
@@ -51,7 +55,7 @@
         $("#spec"+id).append("<span class='span6'>"+(newId+1)+". <input type='text' name='spec["+newId+"][name]' />: <input type='text' name='spec["+newId+"][value]' /></span>");
     }
     function showAdd(){
-        $("thead").append("<tr><td class='span2'><input type='text' name='id' /></td><td class='span4'><input type='text' name='name' /></td><td class='span6'><span title='Save' class='fa fa-times right error button' onclick='$(this).closest(\"tr\").slideUp().remove(); $(\"#popup\").empty();'></span><span title='Save' class='fa fa-check-circle right add button' onclick='addProject(this)'></span></td></tr>").slideDown();
+        $("thead").append("<tr><td class='span2'><input type='text' name='id' /></td><td class='span4'><input type='text' name='name' /></td><td class='span6'><span title='Close' class='fa fa-times right error button' onclick='$(this).closest(\"tr\").slideUp().remove(); $(\"#popup\").empty();'></span><span title='Save' class='fa fa-check-circle right add button' onclick='addProject(this)'></span></td></tr>").slideDown();
     }
     function delProject(id){
         popup("Are you sure you want to delete this project?", function(){
@@ -75,7 +79,41 @@
     }
     function editProject(id){
         console.log(id);
-        getProjects();
+        var tr = $("tr#"+id);
+        var formData = new FormData(tr.find("form")[0]); 
+        $.ajax({
+            url: 'ajax.php?inq=editPrj',  //Server script to process data
+            type: 'POST',
+            xhr: function() {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){ // Check if upload property exists
+                    myXhr.upload.addEventListener('progress',function(){// For handling the progress of the upload
+                        tr.find("span.spin").removeClass("fa-check-circle button").addClass("fa-cog fa-lg fa-spin buttonish");
+                    }, false); 
+                }
+                return myXhr;
+            },
+            success: function(data){
+                                if(!data){
+                                    say("The information is not edited! Please select under 1Mb files.");
+                                    tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
+                                }else{
+                                    say("");
+                                    getProjects();
+                                }
+            },
+            error: function(){
+                say("Cannot connect to database. The project is not edited!");
+                tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
+            },
+            // Form data
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        //getProjects();
 //        var tr = $("tr#"+id);
 //        var user ={
 //            "id"        : id,

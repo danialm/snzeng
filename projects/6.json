@@ -1,0 +1,19 @@
+{
+    "id": "6",
+    "name": "Staging Structure",
+    "description": "S&Z Engineering provides safty evaluation for movie stage structure.",
+    "images": [
+        "img/projects/project6.0.jpg",
+        "img/projects/project6.1.jpg"
+    ],
+    "address": {
+        "street": "Los Angeles",
+        "city": "CA"
+    },
+    "spec": {
+        "Year of Design": "2014",
+        "Client": "One Track Films",
+        "Movie Name": "WE ARE YOUR FRIENDS"
+    }
+}
+
