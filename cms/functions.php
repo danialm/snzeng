@@ -269,38 +269,72 @@ function delete_project($id){
  * 
  */
 function save_file($des, $file){
-    $allowedExts = array("jpg", "jpeg", "png", "pdf");
-    $allowedType = array("image/jpeg", "image/jpg", "image/pjpeg" , "image/png", "image/x-png", "text/pdf");
+    $allowedExts = array("jpg", "jpeg", "png");
+    $allowedType = array("image/jpeg", "image/jpg", "image/pjpeg" , "image/png", "image/x-png");
     $temp = explode(".", $file["name"]);
-    $path = str_replace("_", ".", $des).".jpg";
+    $path_jpg = str_replace("_", ".", $des).".jpg";
+    $path_pdf = str_replace("_", ".", $des).".pdf";
     $extension = strtolower ( end($temp) );
     if (   in_array($file["type"], $allowedType) 
-        && $file["size"] < 1500000
+        && $file["size"] < 2000000
         && in_array($extension, $allowedExts)
         && $file["error"] === 0 ) {
-        if (!file_exists($path)) {
-           // var_dump($path);
-            file_put_contents($path, file_get_contents("img/def.jpg"));
+        if (!file_exists($path_jpg)) {
+            file_put_contents($path_jpg, file_get_contents("img/def.jpg"));
         }
-        move_uploaded_file($file["tmp_name"], $path);
+        move_uploaded_file($file["tmp_name"], $path_jpg);
         return true;
+    } else if (    in_array($file["type"], array("application/pdf")) 
+                && $file["size"] < 10000000
+                && in_array($extension, array("pdf"))
+                && $file["error"] === 0 ) {
+                if (!file_exists($path_pdf)) {
+                    // var_dump($path);
+                    file_put_contents($path_pdf, file_get_contents("image/def.pdf"));
+                }
+                move_uploaded_file($file["tmp_name"], $path_pdf);
+                return true;
     } else {
         return false;
     }
 }
-function save_file_test($des, $file){
-    var_dump($des);
-    var_dump($file);
-//    $allowedExts = array("png");
-//    $temp = explode(".", $file["name"]);
-//    $extension = end($temp);
-//    if (($file["type"] == "image/png")
-//        && ($file["size"] < 1000000)
-//        && in_array($extension, $allowedExts)
-//        && $file["error"] === 0 ) {
-//            move_uploaded_file($file["tmp_name"], str_replace("_", ".", $des));
-//            return true;
-//    } else {
-//        return false;
-//    }
+
+/*
+ * remove the files and edit the project information.
+ * 
+ */
+function edit_project($data){
+    $project_id = $data['id'];
+    if(isset($data["remove"])){
+        foreach($data["remove"] as $key => $value){
+            $ext = ".jpg";
+            $path = "img/projects/project" . $project_id . "." . $key;
+            if($key === "draw")
+                $ext = ".pdf";
+            rename($path.$ext, $path.".old".$ext);
+        }
+    }
+    $con = connect_db();
+    if($con){
+        if(isset($data["spec"])){
+            $q = "DELETE FROM project_spec WHERE project_id= " . $project_id;
+            $res1 = mysqli_query($con,$q);
+            foreach($data["spec"] as $spec){
+                if(trim($spec['name']) != '' && trim($spec['value']) != ''){
+                    $q = "  INSERT INTO project_spec (project_id, name, value)
+                            VALUES ('" . $project_id . "', '" . $spec['name'] ."', '" . $spec['value'] . "')";
+                    $res2 = mysqli_query($con,$q);
+                }
+            }
+        }
+        //var_dump($data);
+        $q = "UPDATE snzeng.projects"
+           . " SET name= '" . $data['name'] . "', type= '" . $data['type'] . "', year= '" . $data['year'] . "', snippet= '" . $data['snippet'] . "', description= '" . $data['description'] . "', address= '" . $data['address'] . "', projects.order= '" . $data['order'] . "'"
+           . " WHERE id= " . $project_id ;
+        $res3 = mysqli_query($con,$q);
+        return $res1 && $res2 && $res3;
+    }else{
+        return false;
+    }
+    
 }

@@ -67,13 +67,15 @@ if(isset($_POST['inq'])){
     }
 }
 if(isset($_GET['inq'])){
+    $res1 = true;
+    $res2 = true;
     if(isset($_FILES) && count($_FILES)>0){
         foreach($_FILES as $des => $file){
             $res = save_file($des, $file);
-            echo $res;
         }
     }
     if($_GET['inq'] === 'editPrj'){
-        //echo $_POST;
+        $res2 = edit_project($_POST);
     }
+    echo $res1 && $res2;
 }

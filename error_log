@@ -20,3 +20,5 @@
 [20-Aug-2014 22:27:41 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 200
 [20-Aug-2014 23:04:24 UTC] PHP Fatal error:  Call to undefined function var_dupm() in /home/admindanial/public_html/snzeng/cms/functions.php on line 183
 [22-Aug-2014 18:36:40 UTC] PHP Fatal error:  Call to undefined function save_image() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 58
+[17-Sep-2014 23:09:35 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 308
+[17-Sep-2014 23:09:51 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 308

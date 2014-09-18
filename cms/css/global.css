@@ -144,6 +144,18 @@ form#sign-in input[type=submit]{
 #project .spec input{
     width: 45%;
 }
+#project input[type="checkbox"] {
+    opacity: 0;
+    position: relative;
+    z-index: 100;
+}
+#project input[type="checkbox"] + lable {
+    color: #aaa;
+    margin-left: -13px;    
+}
+#project input[type="checkbox"]:checked + lable {
+    color: red;
+}
 
 
 @media screen and (max-width: 900px){
