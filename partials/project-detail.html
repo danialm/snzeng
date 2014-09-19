@@ -2,14 +2,14 @@
     <h1 class="title" ng-bind="project.name"></h1>
     <p>
         <span ng-bind="project.description"></span>
-        <span ng-if="project.drawing">You can see the drawing <a href="{{project.drawing}}" target="blank" >here</a>.</span>
+        <span ng-if="project.draw">You can see the drawing <a href="{{project.draw}}" target="blank" >here</a>.</span>
     </p>
     <ul class="specs">
         <li>
-            <span class="title">location: </span><span ng-bind="project.address.street"></span>, <span ng-bind="project.address.city"></span>
+            <span class="title">location: </span><span ng-bind="project.address"></span>
         </li>  
-        <li ng-repeat="(key, val) in project.spec">
-            <span class="title">{{key}}</span>: <span>{{val}}</span>
+        <li ng-repeat="spec in project.spec">
+            <span class="title" ng-bind="spec.name"></span>: <span ng-bind="spec.value"></span>
         </li>      
     </ul>
 </div>
@@ -17,12 +17,13 @@
     <div class="project-images">
         <img ng-src="{{img}}"
              class="project"
-             ng-repeat="img in project.images"
-             ng-class="{active: mainImageUrl == img}">
+             ng-repeat="img in project.img track by $index"
+             ng-if="img != 'img/def.jpg'"
+             ng-class="{active: mainImageUrl == img}" />
     </div>
     <ul class="project-thumbs">
-        <li ng-repeat="img in project.images">
-            <img ng-src="{{img}}" ng-click="setImage(img)">
+        <li ng-repeat="img in project.img track by $index" ng-if="img != 'img/def.jpg'">
+            <img ng-src="{{img}}" ng-click="setImage(img)" />
         </li>
     </ul>
 </div>

@@ -3,14 +3,7 @@
 /* Services */
 
 var snzengServices = angular.module('snzengServices', ['ngResource']);
-
-snzengServices.factory('projects', ['$resource',
-  function($resource){
-    return $resource('projects/:projectId.json', {}, {
-      query: {method:'GET', params:{projectId:'projects'}, isArray:true}
-    });
-  }]);
-  
+    
 snzengServices.factory('office', ['$resource',
   function($resource){
     return $resource('office/office.json', {}, {

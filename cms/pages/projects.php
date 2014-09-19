@@ -24,17 +24,17 @@
             function(project){
                 if(project.length !== 0){
                     $.each(project, function(i, d){
-                        tbody.append("<tr id='"+d.id+"'><td class='span2'>"+d.id+"</td><td class='span6'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error button' onclick='delProject("+d.id+")'></span><span title='Edit' class='fa fa-edit button right edit' onclick='showEdit("+d.id+")'></span><img src='img/projects/project"+d.id+".thumb.jpg' height='30' alt='projects "+d.name+" thumbnail'/></td>\n\
+                        tbody.append("<tr id='"+d.id+"'><td class='span2'>"+d.id+"</td><td class='span6'>"+d.name+"</td><td class='span4'><span title='Remove' class='fa fa-minus-circle right error button' onclick='delProject("+d.id+")'></span><span title='Edit' class='fa fa-edit button right edit' onclick='showEdit("+d.id+")'></span><img src='"+d.thumb+"' height='30' alt='projects "+d.name+" thumbnail'/></td>\n\
                                                         <td class='edit-form'><form id='editPrj' enctype='multipart/form-data'><span class='span2'>id: "+d.id+"<input type='hidden' name='id' value='"+d.id+"' /></span><span class='span4'>name:<input type='text' name='name' value='"+d.name+"' /></span><span  class='span6'><span title='Save' class='fa fa-check-circle fa-2x right add button spin' onclick='editProject("+d.id+")'></span>thumb:<input type='file' name='img/projects/project"+d.id+".thumb' /></span>\n\
                                                                                                                   <span class='span3'>year:<input type='text' name='year' value='"+d.year+"' /></span><span class='span3'>order:<input type='text' name='order' value='"+d.order+"' /></span><span class='span4'>address:<input type='text' name='address' value='"+d.address+"' /></span><span class='span2'><select name='type'><option value='mov'>movie</option><option value='res'>residential</option><option value='com'>comercial</option><option value='apt'>apt/condo</option><option value='fac'>facade</option><option value='nbu'>non-building</option></select></span>\n\
                                                                                                                   <span class='span6'>snippet:<textarea name='snippet'>"+d.snippet+"</textarea></span><span class='span6'>description:<textarea name='description'>"+d.description+"</textarea></span>\n\
-                                                                                                                  <span class='span12'>images:</span><span class='span6' ><span class='right'><input id='icb0' title='Remove Image' type='checkbox' name='remove[0]' value='1' /><lable for='icb0' class='fa fa-minus-circle'></lable></span>1. <input type='file' name='img/projects/project"+d.id+".0' /><img src='img/projects/project"+d.id+".0.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb1' title='Remove Image' type='checkbox' name='remove[1]' value='1' /><lable for='icb1' class='fa fa-minus-circle'></lable></span>2. <input type='file' name='img/projects/project"+d.id+".1' /><img src='img/projects/project"+d.id+".1.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb2' title='Remove Image' type='checkbox' name='remove[2]' value='1' /><lable for='icb2' class='fa fa-minus-circle'></lable></span>3. <input type='file' name='img/projects/project"+d.id+".2' /><img src='img/projects/project"+d.id+".2.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb3' title='Remove Image' type='checkbox' name='remove[3]' value='1' /><lable for='icb3' class='fa fa-minus-circle'></lable></span>4. <input type='file' name='img/projects/project"+d.id+".3' /><img src='img/projects/project"+d.id+".3.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb4' title='Remove Image' type='checkbox' name='remove[4]' value='1' /><lable for='icb4' class='fa fa-minus-circle'></lable></span>5. <input type='file' name='img/projects/project"+d.id+".4' /><img src='img/projects/project"+d.id+".4.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb5' title='Remove Image' type='checkbox' name='remove[5]' value='1' /><lable for='icb5' class='fa fa-minus-circle'></lable></span>6. <input type='file' name='img/projects/project"+d.id+".5' /><img src='img/projects/project"+d.id+".5.jpg' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
-                                                                                                                  <span class='span12'>drawing(pdf):</span><span class='span8' ><span class='right'><input id='icb6' title='Remove Image' type='checkbox' name='remove[draw]' value='1' /><lable for='icb6' class='fa fa-minus-circle'></lable></span>1. <input type='file' name='img/projects/project"+d.id+".draw' /><a target='blank' href='img/projects/project"+d.id+".draw.pdf'>Curent file</a></span></span>\n\
+                                                                                                                  <span class='span12'>images:</span><span class='span6' ><span class='right'><input id='icb0' title='Remove Image' type='checkbox' name='remove[0]' value='1' /><lable for='icb0' class='fa fa-minus-circle'></lable></span>1. <input type='file' name='img/projects/project"+d.id+".0' /><img alt='No Img'src='"+d.img[0]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb1' title='Remove Image' type='checkbox' name='remove[1]' value='1' /><lable for='icb1' class='fa fa-minus-circle'></lable></span>2. <input type='file' name='img/projects/project"+d.id+".1' /><img alt='No Img'src='"+d.img[1]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb2' title='Remove Image' type='checkbox' name='remove[2]' value='1' /><lable for='icb2' class='fa fa-minus-circle'></lable></span>3. <input type='file' name='img/projects/project"+d.id+".2' /><img alt='No Img'src='"+d.img[2]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb3' title='Remove Image' type='checkbox' name='remove[3]' value='1' /><lable for='icb3' class='fa fa-minus-circle'></lable></span>4. <input type='file' name='img/projects/project"+d.id+".3' /><img alt='No Img'src='"+d.img[3]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb4' title='Remove Image' type='checkbox' name='remove[4]' value='1' /><lable for='icb4' class='fa fa-minus-circle'></lable></span>5. <input type='file' name='img/projects/project"+d.id+".4' /><img alt='No Img'src='"+d.img[4]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                                                     <span class='span6' ><span class='right'><input id='icb5' title='Remove Image' type='checkbox' name='remove[5]' value='1' /><lable for='icb5' class='fa fa-minus-circle'></lable></span>6. <input type='file' name='img/projects/project"+d.id+".5' /><img alt='No Img'src='"+d.img[5]+"' height='30' width='40' alt='project "+d.name+" image'/></span>\n\
+                                                                                                                  <span class='span12'>drawing(pdf):</span><span class='span8' ><span class='right'><input id='icb6' title='Remove Image' type='checkbox' name='remove[draw]' value='1' /><lable for='icb6' class='fa fa-minus-circle'></lable></span>1. <input type='file' name='img/projects/project"+d.id+".draw' /><a target='blank' href='"+d.draw+"'>Curent file</a></span></span>\n\
                                                                                                                   <span class='span12'><span title='Add Specification' class='fa fa-plus-circle right add button' onclick='addSpec("+d.id+")'></span>specifications:</span><span id='spec"+d.id+"' class='spec'></span>\n\
                                                                               </form></td></tr>");
                         $('tr#'+d.id+' select[name="type"] option[value="'+d.type+'"]').attr("selected","selected");                                                                              
@@ -63,21 +63,20 @@
 
                 $.post( "ajax.php", {"inq":"delPrj", "id": id})
                     .success(function(data){
-                        if(!data){
-                            say("The project is not deleted!");
-                        }else{
+                        if(data === "1"){
                             say("");
                             getProjects();
+                        }else{
+                            say("ERROR: "+data);
                         }
                     })
                     .fail(function() {
-                      say("Cannot connect to database. The project is not deleted!");
+                      say("ERROR: Cannot connect to server!");
                     });
 
         });
     }
     function editProject(id){
-        console.log(id);
         var tr = $("tr#"+id);
         var formData = new FormData(tr.find("form")[0]); 
         $.ajax({
@@ -93,16 +92,16 @@
                 return myXhr;
             },
             success: function(data){
-                                if(!data){
-                                    say("The information is not edited! Please select under 1Mb files.");
-                                    tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
-                                }else{
+                                if(data === "1"){
                                     say("");
                                     getProjects();
+                                }else{
+                                    say("ERROR: "+data);
+                                    tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
                                 }
             },
             error: function(){
-                say("Cannot connect to database. The project is not edited!");
+                say("ERROR: Cannot connect to server!");
                 tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
             },
             // Form data
@@ -112,31 +111,6 @@
             contentType: false,
             processData: false
         });
-        //getProjects();
-//        var tr = $("tr#"+id);
-//        var user ={
-//            "id"        : id,
-//            "name"      : tr.find("input[name='name']").val(),
-//            "password"  : 'temp',   //temporary value in order that password can stay empty
-//            "email"     : tr.find("input[name='email']").val()
-//        };
-//        if(checkInput(user)){
-//            user.password = tr.find("input[name='password']").val();//real value of the password
-//            $.post( "ajax.php", {"inq":"editUsr", "user":user})
-//                                .success(function(data){
-//                                    if(!data){
-//                                        say("The user is not edited!");
-//                                    }else{
-//                                        say("");
-//                                    }
-//                                })
-//                                .fail(function() {
-//                                  say("Cannot connect to database. The user is not edited!");
-//                                })
-//                                .always(function(){
-//                                    getUsers();
-//                                });
-//        }
     }
     function addProject(t){
         var tr = $(t).closest("tr");
@@ -147,15 +121,15 @@
         if(checkInput(prj)){
             $.post( "ajax.php", {"inq":"addPrj", "prj":prj})
                                 .success(function(data){
-                                    if(!data){
-                                        say("The project is not added!");
-                                    }else{
+                                    if(data === "1"){
                                         say("");
                                         getProjects();
+                                    }else{
+                                        say("ERROR: "+data);
                                     }
                                 })
                                 .fail(function() {
-                                  say("Cannot connect to database. The project is not added!");
+                                  say("ERROR: Cannot connect to server!");
                                 });            
         }
     }

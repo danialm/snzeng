@@ -1,7 +1,6 @@
 <?php
 
 include 'functions.php';
-
 /*
  * Contact Us page form
  * 
@@ -23,6 +22,12 @@ if($_GET['from']){
         }
     }
     echo $result;
+}
+
+
+if(isset($_GET['projects'])&&$_GET['projects']=='true'){
+        $res = get_projects_info();
+        echo json_encode($res);    
 }
 if(isset($_POST['inq'])){
     if($_POST['inq'] === 'contacts'){
@@ -71,11 +76,20 @@ if(isset($_GET['inq'])){
     $res2 = true;
     if(isset($_FILES) && count($_FILES)>0){
         foreach($_FILES as $des => $file){
-            $res = save_file($des, $file);
+            $res2 = save_file($des, $file);
+            //echo $res2;
+            if($res2 !== true){
+                echo $res2;
+                break;
+            }
         }
     }
     if($_GET['inq'] === 'editPrj'){
-        $res2 = edit_project($_POST);
+        $res1 = edit_project($_POST);
+        if($res1 !== true){
+            echo $res1;
+        }
     }
-    echo $res1 && $res2;
+    if($res1 === true && $res2 === true)
+        echo true;
 }

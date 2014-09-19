@@ -17,23 +17,29 @@ snzengControllers.controller('homepageCtrl', ['$scope', 'office',
     $scope.office = office.query();
   }]);
   
-snzengControllers.controller('projectsListCtrl', ['$scope', 'projects',
-  function($scope, projects) {
+snzengControllers.controller('projectsListCtrl', ['$scope', '$http',
+  function($scope, $http) {
     changeNav("projects");
     $scope.pageClass = 'projectsList';
-    $scope.projects = projects.query();
+    $http.get('/ajax.php?projects=true').success(function(d){$scope.projects= d;});
     $scope.orderProp = 'order';
   }]);
 
-snzengControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', 'projects',
-  function($scope, $routeParams, projects) {
+snzengControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
     changeNav();      
     $scope.pageClass = 'projectDetail';
-    $scope.project = projects.get({projectId: $routeParams.projectId}, function(project) {
-      $scope.mainImageUrl = project.images[0];
+    var id = $routeParams.projectId;
+    $http.get('/ajax.php?projects=true').success(function(data){
+        $.each(data, function(i,d){
+            if(d.id == id){
+               $scope.project= d;
+               $scope.mainImageUrl = d.img[0];
+            }
+        });
     });
     $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
+        $scope.mainImageUrl = imageUrl;
     };
   }]);
   

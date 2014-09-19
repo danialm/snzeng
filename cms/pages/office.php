@@ -53,16 +53,16 @@
                     return myXhr;
                 },
                 success: function(data){
-                                    if(!data){
-                                        say("The information is not edited! Please select an under 1Mb PNG file.");
-                                        tr.find("span.fa").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin");
-                                    }else{
+                                    if(data === "1"){
                                         say("");
                                         getOfficeInfo();
+                                    }else{
+                                        say("ERROR: "+data);
+                                        tr.find("span.fa").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin");
                                     }
                 },
                 error: function(){
-                    say("Cannot connect to database. The information is not edited!");
+                    say("ERROR: Cannot connect to server!");
                     tr.find("span.fa").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin");
                 },
                 // Form data
@@ -86,7 +86,7 @@
                                     }
                                 })
                                 .fail(function() {
-                                  say("Cannot connect to database. The information is not edited!");
+                                  say("ERROR: Cannot connect to server!");
                                 })
                                 .always(function(){
                                     getOfficeInfo();
