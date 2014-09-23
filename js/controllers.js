@@ -21,7 +21,11 @@ snzengControllers.controller('projectsListCtrl', ['$scope', '$http',
   function($scope, $http) {
     changeNav("projects");
     $scope.pageClass = 'projectsList';
-    $http.get('/ajax.php?projects=true').success(function(d){$scope.projects= d;});
+    $http.get('/ajax.php?projects=true').success(function(data){
+        $scope.projects= jQuery.grep(data, function(d) {
+              return d.status !== "0";
+            });
+    });
     $scope.orderProp = 'order';
   }]);
 
@@ -30,7 +34,10 @@ snzengControllers.controller('projectDetailCtrl', ['$scope', '$routeParams', '$h
     changeNav();      
     $scope.pageClass = 'projectDetail';
     var id = $routeParams.projectId;
-    $http.get('/ajax.php?projects=true').success(function(data){
+    $http.get('/ajax.php?projects=true').success(function(data_raw){
+        var data = jQuery.grep(data_raw, function(d) {
+              return d.status !== "0";
+            });
         $.each(data, function(i,d){
             if(d.id == id){
                $scope.project= d;

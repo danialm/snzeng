@@ -23,3 +23,4 @@
 [17-Sep-2014 23:09:35 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 308
 [17-Sep-2014 23:09:51 UTC] PHP Fatal error:  Cannot access empty property in /home/admindanial/public_html/snzeng/cms/functions.php on line 308
 [19-Sep-2014 18:34:49 UTC] PHP Fatal error:  Call to undefined function var_dumb() in /home/admindanial/public_html/snzeng/cms/ajax.php on line 77
+[22-Sep-2014 22:59:29 UTC] PHP Fatal error:  Call to undefined function var_dum() in /home/admindanial/public_html/snzeng/cms/functions.php on line 351

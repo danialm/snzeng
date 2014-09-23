@@ -377,8 +377,12 @@ function edit_project($data){
                 }
             }
         }
+        if(!isset($data['status'])){
+            $data['status'] = 1;
+        }
+        $order = str_pad((int) $data['order'], 4, '0', STR_PAD_LEFT);
         $q = "UPDATE snzeng.projects"
-           . " SET name= '" . $data['name'] . "', type= '" . $data['type'] . "', year= '" . $data['year'] . "', snippet= '" . $data['snippet'] . "', description= '" . $data['description'] . "', address= '" . $data['address'] . "', projects.order= '" . $data['order'] . "'"
+           . " SET name= '" . $data['name'] . "', status= '" . $data['status'] . "', type= '" . $data['type'] . "', year= '" . $data['year'] . "', snippet= '" . $data['snippet'] . "', description= '" . $data['description'] . "', address= '" . $data['address'] . "', projects.order= '" . $order . "'"
            . " WHERE id= " . $project_id ;
         mysqli_query($con,$q);
         return true;
