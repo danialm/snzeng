@@ -348,6 +348,7 @@ function save_file($des, $file){
  * 
  */
 function edit_project($data){
+    //var_dump($data);
     $project_id = $data['id'];
     if(isset($data["remove"])){
         foreach($data["remove"] as $key => $value){
@@ -379,6 +380,8 @@ function edit_project($data){
         }
         if(!isset($data['status'])){
             $data['status'] = 1;
+        }else{
+            $data['status'] = 0;
         }
         $order = str_pad((int) $data['order'], 4, '0', STR_PAD_LEFT);
         $q = "UPDATE snzeng.projects"
