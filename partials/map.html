@@ -1,9 +1,10 @@
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-    <ui-gmap-markers
+    <ui-gmap-markers ng-if="true"
             doCluster="map.doCluster"
             models="markers"
             coords="'coords'"
             idkey="'id'" 
-            icon="'icon'">
+            icon="'icon'"
+            chunk="200">
     </ui-gmap-markers>
 </ui-gmap-google-map>

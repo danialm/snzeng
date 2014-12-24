@@ -135,11 +135,11 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi',
     changeNav('map');      
     $scope.pageClass = 'map';
     $scope.markers = new Array;
-    for(var i=0;i<100;i++){
+    for(var i=0;i<1000;i++){
         var rand = Math.random();
         var temp = {
                 "id": i,
-                "coords": {latitude: 45+rand, longitude: -73+rand },
+                "coords": {latitude: 34.05+rand, longitude: -118.25+rand },
                 "click": "",
                 "options": "",
                 "events": "",
@@ -149,6 +149,26 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi',
         $scope.markers.push(temp);    
     }
     uiGmapGoogleMapApi.then(function(maps) {
-        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-    });
+        $scope.map = {
+            actualZoom: null,
+            showMarkers: true,
+            doCluster: true,
+            options: {
+              streetViewControl: false,
+              panControl: false,
+              maxZoom: 18,
+              minZoom: 3
+            },
+            events: {},
+            center: {
+              latitude: 34.05,
+              longitude: -118.25
+            },
+            //clusterOptions: {title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2,
+            //  imageExtension: 'png', imagePath: 'assets/images/cluster', imageSizes: [72]
+            //},
+            clusterOptions: {},
+            zoom: 9
+          };
+        });
   }]);
