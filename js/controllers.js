@@ -129,3 +129,26 @@ snzengControllers.controller('jobsCtrl', ['$scope', 'files',
     $scope.pageClass = 'jobs';
     $scope.fileFlag = files.exist(path);
   }]);
+  
+snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi',
+  function($scope, uiGmapGoogleMapApi) {
+    changeNav('map');      
+    $scope.pageClass = 'map';
+    $scope.markers = new Array;
+    for(var i=0;i<100;i++){
+        var rand = Math.random();
+        var temp = {
+                "id": i,
+                "coords": {latitude: 45+rand, longitude: -73+rand },
+                "click": "",
+                "options": "",
+                "events": "",
+                "control": "",
+                "icon": "img/flag.png"
+            };
+        $scope.markers.push(temp);    
+    }
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+    });
+  }]);

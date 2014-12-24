@@ -8,7 +8,8 @@ var snzengApp = angular.module('snzengApp', [
   'snzengDirectives',
   'snzengControllers',
   'snzengFilters',
-  'snzengServices'
+  'snzengServices',
+  'uiGmapgoogle-maps'
 ]);
 
 snzengApp.config(['$routeProvider',
@@ -38,7 +39,20 @@ snzengApp.config(['$routeProvider',
         templateUrl: 'partials/jobs.html',
         controller: 'jobsCtrl'
       }).
+      when('/map', {
+        templateUrl: 'partials/map.html',
+        controller: 'mapCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
   }]);
+  
+snzengApp.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBcmtPxFA2nC2ifxYtQ-Nw7EGORuhlYxC8',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+});
+    
