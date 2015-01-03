@@ -24,12 +24,16 @@ if($_GET['from']){
     echo $result;
 }
 
-
+if(isset($_GET['markers'])&&$_GET['markers']==='true'){
+        $res = get_projects_info(true);
+        echo json_encode($res); 
+}
 if(isset($_GET['projects'])&&$_GET['projects']=='true'){
         $res = get_projects_info();
         echo json_encode($res);    
 }
 if(isset($_POST['inq'])){
+
     if($_POST['inq'] === 'contacts'){
         $contacts_info = get_contacts_info();
         echo json_encode($contacts_info);
@@ -66,9 +70,21 @@ if(isset($_POST['inq'])){
         $res = add_project($_POST['prj']);
         echo $res;
     }
+    if($_POST['inq'] === 'addMarkerPrj'){
+        $res = add_marker_project($_POST['prj']);
+        echo $res;
+    }
     if($_POST['inq'] === 'delPrj'){
         $res = delete_project($_POST['id']);
         echo $res;
+    }
+    if($_POST['inq'] === 'delAllMarkerPrj'){
+        $res = delete_marker_projects();
+        echo $res;
+    }
+    if($_POST['inq'] === 'getNewProjects'){
+        $res = get_new_projects($_POST['ids']);
+        echo json_encode($res);
     }
 }
 if(isset($_GET['inq'])){

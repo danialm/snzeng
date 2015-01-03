@@ -1,8 +1,16 @@
 <?php 
 //$contacts_info = get_contacts_info();
 ?>
-<span id="popup" class="right"></span>
 <h2><?= $pg['name'] ?></h2>
+<div style="height: 50px"><span title="Remove All Marker Projects" class='fa fa-minus-circle fa-2x right error button' onclick='deleteAllMarkerPrj()'></span></div>
+<div id='drop_box_container'>
+    <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h4>Drag 'n Drop</h4>
+        <p>Drag and Drop an Excel file including the projects list sheet.</p>
+    </div>
+</div>
+<br>
+<span id="popup" class="right"></span>
 <table id="project">
     <thead>
         <tr>
@@ -17,14 +25,41 @@
 </table>
 
 <script>
+    function deleteAllMarkerPrj(){
+        popup("Are you sure you want to delete ALL marker projects?", function(){
+                //Taking care of view
+                $("#drop_box").html("<i class='fa fa-gear fa-spin fa-2x edit right'></i><i class='fa fa-trash-o fa-5x edit'></i> <span class='edit'>Deleting...</span>");
+                $.post( "ajax.php", {"inq":"delAllMarkerPrj"})
+                    .success(function(data){
+                        if(data === "1"){
+                            say("");
+                            window.setTimeout(function(){
+                                $("#drop_box").html("<i class='fa fa-thumbs-o-up fa-3x add right'></i><i class='fa fa-trash-o fa-5x add'></i> <span class='add'>Deleted!</span>");
+                                window.setTimeout(function(){
+                                    $("#drop_box").fadeOut();
+                                    window.setTimeout(function(){
+                                        $("#drop_box").html(dropBoxContent).fadeIn();
+                                    }, 400);
+                                }, 3000);
+                            }, 2000);
+                        }else{
+                            say("ERROR: "+data);
+                        }
+                    })
+                    .fail(function() {
+                      say("ERROR: Cannot connect to server!");
+                    });
+
+        });
+    }
     function getProjects(){
         $("#popup").empty();
         var tbody = $("table#project tbody");
         tbody.empty();
          $.post( "ajax.php", {"inq":"projects"}, 
-            function(project){
-                if(project.length !== 0){
-                    $.each(project, function(i, d){
+            function(projects){
+                if(projects.length !== 0){
+                    $.each(projects, function(i, d){
                         var statusClass;
                         var checked;
                         var statusVal;
@@ -51,7 +86,7 @@
                         $('tr#'+d.id+' select[name="type"] option[value="'+d.type+'"]').attr("selected","selected");                                                                              
                         $.each(d.spec, function(j, s){
                             $("#spec"+d.id).append("<span class='span6'>"+(j+1)+". <input type='text' name='spec["+j+"][name]' value='"+s.name+"' />: <input type='text' name='spec["+j+"][value]' value='"+s.value+"' /></span>");
-                        });                                                                                                                      
+                        });
                     });
                     
                 }else{
@@ -89,38 +124,59 @@
     }
     function editProject(id){
         var tr = $("tr#"+id);
-        var formData = new FormData(tr.find("form")[0]); 
-        $.ajax({
-            url: 'ajax.php?inq=editPrj',  //Server script to process data
-            type: 'POST',
-            xhr: function() {  // Custom XMLHttpRequest
-                var myXhr = $.ajaxSettings.xhr();
-                if(myXhr.upload){ // Check if upload property exists
-                    myXhr.upload.addEventListener('progress',function(){// For handling the progress of the upload
-                        tr.find("span.spin").removeClass("fa-check-circle button").addClass("fa-cog fa-lg fa-spin buttonish");
-                    }, false); 
+        var address = tr.find("input[name='address']").val();
+        
+        //geocodeing the addresses
+        var geocoder = new google.maps.Geocoder();
+        function codeAddress(address, callback) {
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var loc = results[0].geometry.location;
+                    callback(loc);
+                } else {
+                    say("ERROR: "+status);
+                    console.log(status);
+                    throw new Error(status);
                 }
-                return myXhr;
-            },
-            success: function(data){
-                                if(data === "1"){
-                                    say("");
-                                    getProjects();
-                                }else{
-                                    say("ERROR: "+data);
-                                    tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
-                                }
-            },
-            error: function(){
-                say("ERROR: Cannot connect to server!");
-                tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
-            },
-            // Form data
-            data: formData,
-            //Options to tell jQuery not to process data or worry about content-type.
-            cache: false,
-            contentType: false,
-            processData: false
+            });
+        }
+        codeAddress(address, function(loc) {
+            
+            var formData = new FormData(tr.find("form")[0]);
+            formData.append("lat",loc.lat());
+            formData.append("lng",loc.lng());
+            $.ajax({
+                url: 'ajax.php?inq=editPrj',  //Server script to process data
+                type: 'POST',
+                xhr: function() {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // Check if upload property exists
+                        myXhr.upload.addEventListener('progress',function(){// For handling the progress of the upload
+                            tr.find("span.spin").removeClass("fa-check-circle button").addClass("fa-cog fa-lg fa-spin buttonish");
+                        }, false); 
+                    }
+                    return myXhr;
+                },
+                success: function(data){
+                                    if(data === "1"){
+                                        say("");
+                                        getProjects();
+                                    }else{
+                                        say("ERROR: "+data);
+                                        tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
+                                    }
+                },
+                error: function(){
+                    say("ERROR: Cannot connect to server!");
+                    tr.find("span.spin").addClass("fa-check-circle button").removeClass("fa-cog fa-lg fa-spin buttonish");
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });            
         });
     }
     function addProject(t){
@@ -145,6 +201,8 @@
         }
     }
     $(document).ready(function(){
+        dropBoxContent = $("#drop_box").html();
         getProjects();
+        
     });
 </script>

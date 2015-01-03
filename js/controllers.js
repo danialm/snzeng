@@ -130,45 +130,102 @@ snzengControllers.controller('jobsCtrl', ['$scope', 'files',
     $scope.fileFlag = files.exist(path);
   }]);
   
-snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi',
-  function($scope, uiGmapGoogleMapApi) {
+snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http', 'mapShwo', '$routeParams',
+  function($scope, uiGmapGoogleMapApi, $http, mapShwo, $routeParams) {
     changeNav('map');      
     $scope.pageClass = 'map';
     $scope.markers = new Array;
-    for(var i=0;i<1000;i++){
-        var rand = Math.random();
-        var temp = {
-                "id": i,
-                "coords": {latitude: 34.05+rand, longitude: -118.25+rand },
-                "click": "",
-                "options": "",
-                "events": "",
-                "control": "",
-                "icon": "img/flag.png"
-            };
-        $scope.markers.push(temp);    
-    }
+    $scope.windowMarkers = new Array;
+    $scope.noWindowMarkers = new Array;
+    var id = $routeParams.projectId;
+   
+    $http.get('/ajax.php?markers=true').success(function(data){
+        var projects= jQuery.grep(data, function(d) {
+            return d.status !== "0";
+        });
+        $.each(projects,function(i,project){
+                    var temp = {
+                            "id": project.id,
+                            "coords": {latitude: project.lat, longitude: project.lng },
+                            "icon": "img/marker_inactive.png",
+                            "show": false,
+                            "window": true,
+                            "options": {
+                                "clickable": false
+                            },
+                            "content": {
+                                "title": "Project #"+project.id
+                            }
+                    };
+                    temp.onClick = function(e){
+                        return true;
+                    };
+                    if(project.marker_only === "0"){
+                        temp.options.animation = id === project.id ? false : google.maps.Animation.DROP;;
+                        temp.options.clickable = true;
+                        temp.show = (id && id===project.id) ? true : false;
+                        temp.content ={
+                                    "title": project.name,
+                                    "snippet": project.snippet,
+                                    "link": { "url": "#/projects/"+project.id,
+                                              "text": "more..."
+                                    },
+                                    "img": "img/projects/project"+project.id+".thumb.jpg"
+                        };
+                        temp.icon = "img/marker.png";
+                        temp.closeClick = function(){
+                            temp.show = false;
+                        };
+                        temp.onClick = function(){
+                            temp.show = false;
+                        };
+
+                        $scope.windowMarkers.push(temp); 
+                    }else{
+
+                        $scope.noWindowMarkers.push(temp);
+                    }
+                    if(id && id === project.id){
+                        $scope.map.zoom = 15;
+                        $scope.map.center.latitude = project.lat;
+                        $scope.map.center.longitude = project.lng;
+                    }
+                    $scope.markers.push(temp);
+                    
+        });
+    });
+    
     uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {
-            actualZoom: null,
-            showMarkers: true,
             doCluster: true,
-            options: {
-              streetViewControl: false,
-              panControl: false,
-              maxZoom: 18,
-              minZoom: 3
-            },
-            events: {},
             center: {
-              latitude: 34.05,
-              longitude: -118.25
+              latitude: 36,
+              longitude: -118
             },
-            //clusterOptions: {title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2,
-            //  imageExtension: 'png', imagePath: 'assets/images/cluster', imageSizes: [72]
-            //},
-            clusterOptions: {},
-            zoom: 9
-          };
-        });
+            zoom: 6,
+            options: {
+                maxZoom: 18,
+                minZoom: 4,
+                mapTypeControl: false,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+                    position: google.maps.ControlPosition.RIGHT_CENTER
+                },
+                panControl: false,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE,
+                    position: google.maps.ControlPosition.RIGHT_CENTER
+                },
+                scaleControl: false,
+                scaleControlOptions : {
+                    position: google.maps.ControlPosition.RIGHT_CENTER
+                },
+                streetViewControl: false,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.RIGHT_CENTER
+                }
+            }
+        };
+    });
   }]);

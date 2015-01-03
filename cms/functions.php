@@ -209,11 +209,13 @@ function edit_office_info($pair){
  * gets the projects information from tabels projects and projec_spec.
  * 
  */
-function get_projects_info(){
+function get_projects_info($markerOnly = false){
     $con = connect_db();
     if($con){
         $out = array();
         $q = "SELECT * FROM projects";
+        if(!$markerOnly)
+            $q .= " WHERE marker_only='0'";
         $res = mysqli_query($con,$q);
         while($row = mysqli_fetch_array($res)){
             $specs = array();
@@ -254,6 +256,61 @@ function add_project($prj){
         $res = mysqli_query($con,$q);
         if(!$res)
             return "Project ID already exists!";
+        return true;
+    }else{
+        return "Cannot connect to database. Try again!";
+    }
+}
+/*
+ * add a projects to the table projects with default values from an uploaded excel file.
+ * 
+ */
+function add_marker_project($prj){
+    $con = connect_db();
+    if($con){
+            $q = "INSERT INTO projects (id, name, address, status, marker_only, lat, lng)";
+            $q.= " VALUES ('" . $prj['id'] . "', '" . $prj['name'] . "', '" . $prj['address'] . "', '1', '1', '" . $prj['lat'] . "', '" . $prj['lng'] . "')";
+            $res = mysqli_query($con,$q);
+            if(!$res)
+                return "Project ID already exists!";
+            return true;
+    }else{
+        return "Cannot connect to database. Try again!";
+    }
+}
+
+/*
+ * returns the project ids that do not exist.
+ * 
+ */
+function get_new_projects( $ids ) {
+    $con = connect_db();
+    if($con){
+        $return = array();
+        foreach($ids as $id){
+            $q = "SELECT id from projects WHERE id='" . $id['id'] . "'";
+            $res = mysqli_query($con,$q);
+            if(!mysqli_fetch_array($res)){
+                    array_push($return, $id['rowNumber']);
+            }      
+        }
+        return $return;
+    }else{
+        return "Cannot connect to database. Try again!";
+    }
+}
+/*
+ * delete all the marker_only projects.
+ * 
+ */
+function delete_marker_projects(){
+    $con = connect_db();
+    if($con){
+        $q = "DELETE from projects WHERE marker_only= '1'";
+        $res = mysqli_query($con,$q);
+        if(!$res)
+            return "Delete all marker projects failed!";
+        
         return true;
     }else{
         return "Cannot connect to database. Try again!";
@@ -348,7 +405,6 @@ function save_file($des, $file){
  * 
  */
 function edit_project($data){
-    //var_dump($data);
     $project_id = $data['id'];
     if(isset($data["remove"])){
         foreach($data["remove"] as $key => $value){
@@ -385,7 +441,7 @@ function edit_project($data){
         }
         $order = str_pad((int) $data['order'], 4, '0', STR_PAD_LEFT);
         $q = "UPDATE snzeng.projects"
-           . " SET name= '" . $data['name'] . "', status= '" . $data['status'] . "', type= '" . $data['type'] . "', year= '" . $data['year'] . "', snippet= '" . $data['snippet'] . "', description= '" . $data['description'] . "', address= '" . $data['address'] . "', projects.order= '" . $order . "'"
+           . " SET name= '" . $data['name'] . "', status= '" . $data['status'] . "', type= '" . $data['type'] . "', year= '" . $data['year'] . "', snippet= '" . $data['snippet'] . "', description= '" . $data['description'] . "', address= '" . $data['address'] . "', projects.order= '" . $order . "', lat= '" . $data['lat'] . "', lng= '" . $data['lng'] . "'"
            . " WHERE id= " . $project_id ;
         mysqli_query($con,$q);
         return true;

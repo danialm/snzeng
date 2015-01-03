@@ -43,6 +43,10 @@ snzengApp.config(['$routeProvider',
         templateUrl: 'partials/map.html',
         controller: 'mapCtrl'
       }).
+      when('/map/:projectId', {
+        templateUrl: 'partials/map.html',
+        controller: 'mapCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
@@ -50,7 +54,7 @@ snzengApp.config(['$routeProvider',
   
 snzengApp.config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBcmtPxFA2nC2ifxYtQ-Nw7EGORuhlYxC8',
+        key: 'AIzaSyACYkJtaPFR-UcR2ci-Xic7myJAWW977j0',
         v: '3.17',
         libraries: 'weather,geometry,visualization'
     });

@@ -16,6 +16,8 @@ include 'functions.php';
         <link rel="stylesheet" type="text/css" href="/cms/css/global.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="/cms/js/global.js"></script>
+        <script src="cms/js/js-xlsx/dist/xlsx.core.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     </head>
     <body>
         <?php;
