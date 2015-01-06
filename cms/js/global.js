@@ -56,7 +56,7 @@ function drop(e) {
                 var projList = new Array();
                 /* if binary string, read with type 'binary' */
                 var workbook = XLSX.read(data, {type: 'binary'});
-                var worksheet = workbook.Sheets.projects || false;
+                var worksheet = workbook.Sheets.Projects || false;
                 if (worksheet) {
                     //taking care of view
                     $("#drop_box").html("<i class='fa fa-gear fa-spin fa-2x add right'></i><i class='fa fa-file-excel-o fa-5x add'></i> <span class='add'>Uploading... <span class='progress-container'><span id='progress'></span></span></span>");
@@ -79,7 +79,8 @@ function drop(e) {
                     
                     var ids = new Array();
                     for (var cell in worksheet) {
-                        if (cell.indexOf("A") >= 0){
+                            console.log(worksheet[cell]);
+                        if (cell.indexOf("A") >= 0 && worksheet[cell].t === 'n' ){ //colomn A with numneric value
                             ids.push({
                                 "id": worksheet[cell]['v'],
                                 "rowNumber": cell.substring(1)
@@ -97,12 +98,15 @@ function drop(e) {
                         var msg = JSON.parse(json);
                         for(var i=0 ; i<msg.length ; i++){
                             var m = msg[i];
-                            var temp = {
-                                "id": worksheet['A'+m]['v'],
-                                "name": worksheet['B'+m]['v'],
-                                "address": worksheet['C'+m]['v']
-                            };
-                            projList.push(temp);
+                            if(worksheet['C'+m] && worksheet['C'+m].t === 's' && worksheet['C'+m].v.trim() !== ''){
+                                console.log("--------->"+worksheet['A'+m]['v']);
+                                var temp = {
+                                    "id": worksheet['A'+m]['v'],
+                                    "name": (worksheet['B'+m] && worksheet['B'+m].t === 's' && worksheet['B'+m].v.trim() !== '') ? worksheet['B'+m]['v'] : "No Name",
+                                    "address": worksheet['C'+m]['v']
+                                };
+                                projList.push(temp);
+                            }
                         }
                         var loopTimeout = function(i, max, interval, func) {
                             if (i >= max) {
