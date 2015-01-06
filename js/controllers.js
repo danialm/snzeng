@@ -138,7 +138,7 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
     $scope.windowMarkers = new Array;
     $scope.noWindowMarkers = new Array;
     var id = $routeParams.projectId;
-   
+    var mob = $("body").width() < 350 ? true : false;
     $http.get('/ajax.php?markers=true').success(function(data){
         var projects= jQuery.grep(data, function(d) {
             return d.status !== "0";
@@ -186,7 +186,7 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                         $scope.noWindowMarkers.push(temp);
                     }
                     if(id && id === project.id){
-                        $scope.map.zoom = 15;
+                        $scope.map.zoom = 19;
                         $scope.map.center.latitude = project.lat;
                         $scope.map.center.longitude = project.lng;
                     }
@@ -199,12 +199,12 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
         $scope.map = {
             doCluster: true,
             center: {
-              latitude: 36,
-              longitude: -118
+              latitude: mob ? 35.5 : 36,
+              longitude: mob ? -120 : -118
             },
             zoom: 6,
             options: {
-                maxZoom: 18,
+                maxZoom: 19,
                 minZoom: 4,
                 mapTypeControl: false,
                 mapTypeControlOptions: {
@@ -212,7 +212,7 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                     position: google.maps.ControlPosition.RIGHT_CENTER
                 },
                 panControl: false,
-                zoomControl: true,
+                zoomControl: !mob,
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.LARGE,
                     position: google.maps.ControlPosition.RIGHT_CENTER

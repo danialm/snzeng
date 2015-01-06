@@ -6,8 +6,7 @@
     </p>
     <ul class="specs"> 
         <li>
-            <span class="title">location: </span><span ng-bind="project.address"></span>
-             <a href="#/map/{{project.id}}"> <i class="fa fa-map-marker"></i></a>
+            <span class="title">location: </span><a href="#/map/{{project.id}}"><span ng-bind="project.address"></span> <i class="fa fa-map-marker"></i></a>
         </li>  
         <li ng-repeat="spec in project.spec">
             <span class="title" ng-bind="spec.name"></span>: <span ng-bind="spec.value"></span>
