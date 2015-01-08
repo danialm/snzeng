@@ -154,7 +154,9 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                                 "clickable": false
                             },
                             "content": {
-                                "title": "Project #"+project.id
+                                "title": "Project #"+project.id,
+                                "snippet": "This image is from Google Street View",
+                                "img": "https://maps.googleapis.com/maps/api/streetview?size=100x66&location="+project.lat+","+project.lng+"&key=AIzaSyACYkJtaPFR-UcR2ci-Xic7myJAWW977j0"
                             }
                     };
                     temp.onClick = function(e){
