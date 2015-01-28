@@ -143,7 +143,9 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
         var projects= jQuery.grep(data, function(d) {
             return d.status !== "0";
         });
+
         $.each(projects,function(i,project){
+                                    
                     var temp = {
                             "id": project.id,
                             "coords": {latitude: project.lat, longitude: project.lng },
@@ -154,9 +156,9 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                                 "clickable": false
                             },
                             "content": {
-                                "title": "Project #"+project.id,
-                                "snippet": "This image is from Google Street View",
-                                "img": "https://maps.googleapis.com/maps/api/streetview?size=100x66&location="+project.lat+","+project.lng+"&key=AIzaSyACYkJtaPFR-UcR2ci-Xic7myJAWW977j0"
+                                "title": project.name,
+                                "snippet": project.thumb ? "S&Z Engineering exclusive image" : "This image is from Google Street View",
+                                "img": project.thumb || "https://maps.googleapis.com/maps/api/streetview?size=100x66&location="+project.lat+","+project.lng+"&key=AIzaSyACYkJtaPFR-UcR2ci-Xic7myJAWW977j0"
                             }
                     };
                     temp.onClick = function(e){
@@ -166,13 +168,14 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                         temp.options.animation = id === project.id ? false : google.maps.Animation.DROP;;
                         temp.options.clickable = true;
                         temp.show = (id && id===project.id) ? true : false;
+                        
                         temp.content ={
                                     "title": project.name,
                                     "snippet": project.snippet,
                                     "link": { "url": "#/projects/"+project.id,
                                               "text": "more..."
                                     },
-                                    "img": "img/projects/project"+project.id+".thumb.jpg"
+                                    "img": project.thumb
                         };
                         temp.icon = "img/marker.png";
                         temp.closeClick = function(){

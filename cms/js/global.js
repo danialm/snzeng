@@ -42,6 +42,7 @@ function pausecomp(millis) {
     while (curDate - date < millis);
 }
 function drop(e) {
+    say("");
     e.stopPropagation();
     e.preventDefault();
     var files = e.dataTransfer.files;
@@ -71,7 +72,6 @@ function drop(e) {
                                 callback(proj);
                             } else {
                                 $("#drop_box").html("<p class='error'><i class='fa fa-file-o fa-5x'></i> It is too much for Google to geo-code! Drop the same file again.</p>");
-                                console.log(status);
                                 throw new Error(status);
                             }
                         });
@@ -79,7 +79,6 @@ function drop(e) {
                     
                     var ids = new Array();
                     for (var cell in worksheet) {
-                            console.log(worksheet[cell]);
                         if (cell.indexOf("A") >= 0 && worksheet[cell].t === 'n' ){ //colomn A with numneric value
                             ids.push({
                                 "id": worksheet[cell]['v'],
@@ -99,10 +98,9 @@ function drop(e) {
                         for(var i=0 ; i<msg.length ; i++){
                             var m = msg[i];
                             if(worksheet['C'+m] && worksheet['C'+m].t === 's' && worksheet['C'+m].v.trim() !== ''){
-                                console.log("--------->"+worksheet['A'+m]['v']);
                                 var temp = {
                                     "id": worksheet['A'+m]['v'],
-                                    "name": (worksheet['B'+m] && worksheet['B'+m].t === 's' && worksheet['B'+m].v.trim() !== '') ? worksheet['B'+m]['v'] : "No Name",
+                                    "name": (worksheet['D'+m] && worksheet['D'+m].t === 's' && worksheet['D'+m].v.trim() !== '') ? worksheet['D'+m]['v'] : "No Name",
                                     "address": worksheet['C'+m]['v']
                                 };
                                 projList.push(temp);
@@ -122,13 +120,12 @@ function drop(e) {
                             if(cmp === tot-1){
                                 $("#progress").css("width", "100%");
                                 window.setTimeout(function(){
-                                    $("#drop_box").html("<i class='fa fa-thumbs-o-up fa-3x add right'></i><i class='fa fa-file-excel-o fa-5x add'></i> <span class='add'>Saved! <i title='Referesh' class='fa fa-repeat fa-lg edit button' onclick='refereshBox()'></i></span>");
+                                    $("#drop_box").html("<i class='fa fa-thumbs-o-up fa-3x add right'></i><i class='fa fa-file-excel-o fa-5x add'></i> <span class='add'>Saved! <i title='Referesh' class='fa fa-repeat fa-lg edit button' onclick='refereshBox(\"excel\")'></i></span>");
                                 }, 1000);
                                 return;
                             }
                             var percent = 100/tot*cmp;
                             $("#progress").css("width", percent+"%");
-                            console.log(percent);
                         };
                         if(projList.length > 0){
                             loopTimeout(0, projList.length, time, function(i){
@@ -151,6 +148,94 @@ function drop(e) {
         reader.readAsBinaryString(f);
     }
 }
+function imgDrop(e) {
+    say("");
+    e.stopPropagation();
+    e.preventDefault();
+    var images = [],
+    error = [],
+    files = e.dataTransfer.files;
+    for (var i=0; files[i];i++) {
+        var file = files[i];
+        if (!file.type.match(/image.*/)){
+            error.push(file.name+" is not an image.");
+            continue;
+        }
+        if(file.size > 50000){
+            error.push(file.name+" is too big.");
+            continue;
+        }
+        images.push(file);
+    }
+    if(images.length>0){
+        //taking care of view
+        $("#img_drop_box").html("<i class='fa fa-gear fa-spin fa-2x add right'></i><i class='fa fa-file-image-o fa-5x add'></i> <span class='add'>Uploading... </span>");
+        uploadImages(images, function(err){
+            if(typeof err === "undefined"){
+                $("#img_drop_box").html("<i class='fa fa-thumbs-o-up fa-3x add right'></i><i class='fa fa-file-image-o fa-5x add'></i> <span class='add'>Saved! <i title='Referesh' class='fa fa-repeat fa-lg edit button' onclick='refereshBox(\"img\")'></i></span>");
+            }else{
+                $("#img_drop_box").html("<p class='error'><i class='fa fa-file-o fa-5x'></i> " + err + "</p>");
+            }
+        });
+    }
+    
+    if(error.length>0){
+        say(" <p class='error'>"+error.join("<br>")+"</p>");
+    }
+
+}
+function uploadImages(images, callBack){
+    var ids = [];
+    if(!images.length>0) return callBack("No images!");
+    
+    var formData = new FormData();
+    for(var i=0; images[i]; i++ ){
+        var image = images[i];
+        ids.push({
+            "id": image.name.slice(0,-4),
+            "rowNumber": i.toString()
+        });
+    }
+    $.ajax({
+        type: "post",
+        url: "ajax.php",
+        data: {
+            "inq": "getNewProjects",
+            "ids": ids
+        }
+    }).done(function (json) {
+        var msgs = JSON.parse(json);
+        for(var i=0; images[i]; i++){
+            var image = images[i];
+            if(msgs.indexOf(i.toString())<0){
+                formData.append("img/projects/project"+image.name.slice(0,-4)+".thumb", image);
+            }
+        }
+        $.ajax({
+            url: 'ajax.php?inq=addImages',  //Server script to process data
+            type: 'POST',
+            xhr: function() {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                return myXhr;
+            },
+            success: function(data){
+                                if(data === "1"){//success
+                                    callBack();
+                                }else{//error
+                                    callback(data.toString());
+                                }
+            },
+            error: function(){
+            },
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        
+    });
+}
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -166,9 +251,11 @@ function addMarkerProject (prj){
         console.log(json);
     });
 }
-function refereshBox(){
-        $("#drop_box").fadeOut();
+function refereshBox(dropBox){
+    say("");
+    var box = dropBox === 'img' ? $("#img_drop_box") : $("#drop_box");
+        box.fadeOut();
         window.setTimeout(function(){
-            $("#drop_box").html(dropBoxContent).fadeIn();
+            box.html(dropBoxContent).fadeIn();
         }, 400); 
 }

@@ -158,7 +158,30 @@ form#sign-in input[type=submit]{
 #project input[type="checkbox"]:checked + lable {
     color: red;
 }
-#drop_box{
+.upload-header{
+    height: 50px;
+}
+.upload-header>div{
+    background-color: #EAFFFD;
+    border-top-left-radius: 10px;
+    display: inline-block;
+    height: inherit;
+}
+.upload-header p{
+    border-top-left-radius: 10px;
+    height: inherit;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    color: #888;
+    cursor: pointer;
+}
+.upload-header p.active{
+    background-color: white;
+    color: black;
+}
+#drop_box, #img_drop_box{
     height: 90px;
     color: #888;
     padding: 10px;

@@ -2,11 +2,15 @@
 //$contacts_info = get_contacts_info();
 ?>
 <h2><?= $pg['name'] ?></h2>
-<div style="height: 50px"><span title="Remove All Marker Projects" class='fa fa-minus-circle fa-2x right error button' onclick='deleteAllMarkerPrj()'></span></div>
+<div class='upload-header'><div><p class="active">Upload Image</p><p>Upload Excel</p></div><span title="Remove All Marker Projects" class='fa fa-minus-circle fa-2x right error button' onclick='deleteAllMarkerPrj()'></span></div>
 <div id='drop_box_container'>
-    <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <h4>Drag 'n Drop</h4>
-        <p>Drag and Drop an Excel file including the projects list sheet.</p>
+    <div id="img_drop_box" ondrop="imgDrop(event)" ondragover="allowDrop(event)">
+        <h4>Drag 'n Drop <i class="fa fa-file-image-o fa-lg"></i></h4>
+        <p>Drag and drop some images.</p>
+    </div>
+    <div id="drop_box" class="hide" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <h4>Drag 'n Drop <i class="fa fa-file-excel-o fa-lg"></i></h4>
+        <p>Drag and drop an excel file including the projects list sheet.</p>
     </div>
 </div>
 <br>
@@ -143,6 +147,7 @@
         codeAddress(address, function(loc) {
             
             var formData = new FormData(tr.find("form")[0]);
+            console.log(formData);
             formData.append("lat",loc.lat());
             formData.append("lng",loc.lng());
             $.ajax({
@@ -201,8 +206,16 @@
         }
     }
     $(document).ready(function(){
-        dropBoxContent = $("#drop_box").html();
+        dropBoxContent = $("#drop_box_container>div:not(.hide)").html();
         getProjects();
+        
+        $(".upload-header").find("p").on("click", function(e){
+            say("");
+            $("#drop_box_container>div:not(.hide)").html(dropBoxContent);
+            $(".upload-header").find("p").toggleClass("active");
+            $("#drop_box_container>div").toggleClass("hide");
+            dropBoxContent = $("#drop_box_container>div:not(.hide)").html();
+        });
         
     });
 </script>

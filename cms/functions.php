@@ -235,7 +235,7 @@ function get_projects_info($markerOnly = false){
                     array_push ($row['img'], DEFAULT_IMAGE);
             }
             $row['draw'] = is_file($path."draw.pdf") ? $path."draw.pdf" : false;
-            $row['thumb'] = is_file($path."thumb.jpg") ? $path."thumb.jpg" : DEFAULT_IMAGE;
+            $row['thumb'] = is_file($path."thumb.jpg") ? $path."thumb.jpg" : ($markerOnly? false : DEFAULT_IMAGE);
             array_push($out, $row);
         }
         return $out;
@@ -354,8 +354,6 @@ function delete_project($id){
  */
 function save_file($des, $file){
     if($file["size"] !== 0){
-//        var_dump($des);
-//        var_dump($file);
         $allowedExts = array("jpg", "jpeg", "png");
         $allowedType = array("image/jpeg", "image/jpg", "image/pjpeg" , "image/png", "image/x-png");
         $temp = explode(".", $file["name"]);
