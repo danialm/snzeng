@@ -305,6 +305,17 @@ function get_new_projects( $ids ) {
  */
 function delete_marker_projects(){
     $con = connect_db();
+    $markers = get_projects_info(true);
+    $des = "img/projects/old.jpg";
+    foreach($markers as $mrkr){
+        if($mrkr['marker_only']==="0")
+            continue;
+        $path = "img/projects/project" . $mrkr['id']  . ".thumb.jpg";
+        if(is_file($path)){
+            rename($path, $des);
+        }
+    }
+    
     if($con){
         $q = "DELETE from projects WHERE marker_only= '1'";
         $res = mysqli_query($con,$q);

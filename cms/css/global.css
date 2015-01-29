@@ -162,24 +162,23 @@ form#sign-in input[type=submit]{
     height: 50px;
 }
 .upload-header>div{
-    background-color: #EAFFFD;
     border-top-left-radius: 10px;
     display: inline-block;
     height: inherit;
 }
 .upload-header p{
+    background-color: white;
+    opacity: .6;
     border-top-left-radius: 10px;
     height: inherit;
     display: inline-block;
     text-align: center;
     padding: 10px;
     margin: 0;
-    color: #888;
     cursor: pointer;
 }
 .upload-header p.active{
-    background-color: white;
-    color: black;
+    opacity: 1;
 }
 #drop_box, #img_drop_box{
     height: 90px;
