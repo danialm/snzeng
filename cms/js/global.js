@@ -72,7 +72,7 @@ function drop(e) {
                                 callback(proj);
                             } else {
                                 $("#drop_box").html("<p class='error'><i class='fa fa-file-o fa-5x'></i> It is too much for Google to geo-code! Drop the same file again.</p>");
-                                throw new Error(status);
+                                window.clearInterval(window.TO);
                             }
                         });
                     }
@@ -112,7 +112,7 @@ function drop(e) {
                             }
                             func(i);
                             i++;
-                            setTimeout(function() {
+                            window.TO = setTimeout(function() {
                                 loopTimeout(i, max, interval, func);
                             }, interval);
                         };
@@ -131,12 +131,26 @@ function drop(e) {
                             loopTimeout(0, projList.length, time, function(i){
                                 progress(i, projList.length);
                                 codeAddress(projList[i], function(prj) {
-                                    addMarkerProject(prj);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "ajax.php",
+                                        data: {
+                                            "inq": "addMarkerPrj",
+                                            "prj": prj
+                                        }
+                                    }).fail(function ( e ) {
+                                        console.log(e);
+                                        $("#drop_box").html("<p class='error'><i class='fa fa-file-o fa-5x'></i> Server Error! Please wait 1 MINUTE and try the same excel file again.</p>");
+                                        window.clearInterval(window.TO);
+                                    });
                                 });
                             });
                         }else{
                                 progress(0, 1);
                         }
+                    }).fail(function(e){
+                        console.log(e);
+                        $("#drop_box").html("<p class='error'><i class='fa fa-file-o fa-5x'></i> Server Error! Please wait 1 MINUTE and try the same excel file again.</p>");
                     });
                 } else {
                     throw("This file does not have 'projects' worksheet! ");
@@ -191,8 +205,10 @@ function uploadImages(images, callBack){
     var formData = new FormData();
     for(var i=0; images[i]; i++ ){
         var image = images[i];
+        var id = image.name.slice(0,image.name.indexOf("_"));
+        console.log(id);
         ids.push({
-            "id": image.name.slice(0,-4),
+            "id": id,
             "rowNumber": i.toString()
         });
     }
@@ -208,7 +224,8 @@ function uploadImages(images, callBack){
         for(var i=0; images[i]; i++){
             var image = images[i];
             if(msgs.indexOf(i.toString())<0){
-                formData.append("img/projects/project"+image.name.slice(0,-4)+".thumb", image);
+                console.log(image.name);
+                formData.append("img/projects/project"+image.name.slice(0,image.name.indexOf("_"))+".thumb", image);
             }
         }
         $.ajax({
@@ -239,18 +256,7 @@ function uploadImages(images, callBack){
 function allowDrop(ev) {
     ev.preventDefault();
 }
-function addMarkerProject (prj){
-    $.ajax({
-        type: "POST",
-        url: "ajax.php",
-        data: {
-            "inq": "addMarkerPrj",
-            "prj": prj
-        }
-    }).error(function ( json ) {
-        console.log(json);
-    });
-}
+
 function refereshBox(dropBox){
     say("");
     var box = dropBox === 'img' ? $("#img_drop_box") : $("#drop_box");
