@@ -205,8 +205,7 @@ function uploadImages(images, callBack){
     var formData = new FormData();
     for(var i=0; images[i]; i++ ){
         var image = images[i];
-        var id = image.name.slice(0,image.name.indexOf("_"));
-        console.log(id);
+        var id = parseInt(image.name.slice(0,image.name.indexOf("_"))).toString();
         ids.push({
             "id": id,
             "rowNumber": i.toString()
@@ -224,8 +223,7 @@ function uploadImages(images, callBack){
         for(var i=0; images[i]; i++){
             var image = images[i];
             if(msgs.indexOf(i.toString())<0){
-                console.log(image.name);
-                formData.append("img/projects/project"+image.name.slice(0,image.name.indexOf("_"))+".thumb", image);
+                formData.append("img/projects/project"+parseInt(image.name.slice(0,image.name.indexOf("_"))).toString()+".thumb", image);
             }
         }
         $.ajax({
@@ -250,7 +248,6 @@ function uploadImages(images, callBack){
             contentType: false,
             processData: false
         });
-        
     });
 }
 function allowDrop(ev) {
