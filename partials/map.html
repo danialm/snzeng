@@ -8,16 +8,21 @@
             options="'options'"
             chunk="20">
     </ui-gmap-markers>-->
-    <ui-gmap-markers ng-if="map.doCluster"
+    <ui-gmap-markers 
+            ng-if="map.doCluster"
             doCluster="map.doCluster"
             models="markers"
             coords="'coords'"
             idkey="'id'" 
             icon="'icon'"
             options="'options'"
-            chunk="20"
-            click="'onClick'">
-            <ui-gmap-windows show="'show'" closeClick="'closeClick'">
+            chunk="false"
+            click="'onClick'"
+            clusterEvents="cluster.events"
+            clusterOptions="cluster.options">
+            <ui-gmap-windows 
+                show="'show'" 
+                closeClick="'closeClick'">
                 <div ng-non-bindable style="max-width: 260px">
                     <img style="display: inline-block; float:right; margin-left: 5px" src='{{content.img}}'/>
                     <h4>{{content.title}}</h4>

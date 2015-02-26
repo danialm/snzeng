@@ -137,21 +137,28 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
     $scope.markers = new Array;
     $scope.windowMarkers = new Array;
     $scope.noWindowMarkers = new Array;
+    $scope.cluster = {};
+    $scope.cluster.events ={
+        clusteringend: function(a,b){
+        }
+    };
+    $scope.cluster.options ={
+        averageCenter: true
+    };
     var id = $routeParams.projectId;
     var mob = $("body").width() < 350 ? true : false;
     $http.get('/ajax.php?markers=true').success(function(data){
         var projects= jQuery.grep(data, function(d) {
             return d.status !== "0";
         });
-
         $.each(projects,function(i,project){
                                     
                     var temp = {
                             "id": project.id,
                             "coords": {latitude: project.lat, longitude: project.lng },
                             "icon": project.thumb ? "img/marker_active.png" : "img/marker_inactive.png",
-                            "show": false,
                             "window": true,
+                            "show":false,
                             "options": {
                                 "clickable": false
                             },
@@ -160,9 +167,6 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                                 "snippet": project.thumb ? "S&Z Engineering exclusive image" : "This image is from Google Street View",
                                 "img": project.thumb || "https://maps.googleapis.com/maps/api/streetview?size=100x66&location="+project.lat+","+project.lng+"&key=AIzaSyACYkJtaPFR-UcR2ci-Xic7myJAWW977j0"
                             }
-                    };
-                    temp.onClick = function(e){
-                        return true;
                     };
                     if(project.marker_only === "0"){
                         temp.options.animation = id === project.id ? false : google.maps.Animation.DROP;;
@@ -195,11 +199,16 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                         $scope.map.center.latitude = project.lat;
                         $scope.map.center.longitude = project.lng;
                     }
+                    temp.onClick = closeWindows;
                     $scope.markers.push(temp);
                     
         });
     });
-    
+    function closeWindows(){
+        $.each($scope.markers,function(i){
+            $scope.markers[i].show = false;
+        });
+    }
     uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {
             doCluster: true,
