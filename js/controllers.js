@@ -149,7 +149,7 @@ snzengControllers.controller('mapCtrl', ['$scope','uiGmapGoogleMapApi', '$http',
                     var temp = {
                             "id": project.id,
                             "coords": {latitude: project.lat, longitude: project.lng },
-                            "icon": "img/marker_inactive.png",
+                            "icon": project.thumb ? "img/marker_active.png" : "img/marker_inactive.png",
                             "show": false,
                             "window": true,
                             "options": {
